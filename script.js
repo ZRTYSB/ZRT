@@ -241,6 +241,76 @@ initGate();
 
 const SEED_LETTERS = [
   {
+    id: "2026-08-09",
+    title: "İkinci Ayımız <3",
+    date: "9 Ağustos 2026",
+    dateTime: "2026-08-09",
+    music: {
+      url: "https://www.youtube.com/watch?v=cEXdef-P-IY",
+      videoId: "cEXdef-P-IY",
+      endSec: 245, // 4:05
+    },
+    greeting: "Zehra,",
+    body: [
+      "Sana bu kez seni ne kadar sevdiğimi anlatmaya çalışmak yerine, sende sevdiğim şeyleri anlatmak istiyorum.",
+      "Çünkü bazen bir insanı sevmenin sebebi tek bir şey olmuyor. Bir bakışı, bir cümlesi, bir düşüncesi, bir tepkisi, hatta bazen hiçbir şey yapmadan sadece hayatında oluşu bile insanın içinde bir yere dokunuyor.",
+      "Sende benim için böyle olan çok fazla şey var.",
+      "Mesela sen bir şey anlatırken konuyu anlatış biçimini seviyorum. Bir şeyi gerçekten önemsediğinde sesindeki değişikliği seviyorum. Bir konu hakkında düşünürken o kendine has ciddiyetini seviyorum. Bir şey hoşuna gittiğinde bunu belli edişini seviyorum. Bazen hiç farkında olmadan yaptığın küçük şeyleri bile seviyorum.",
+      "Belki sen bunların çoğunu kendinde fark etmiyorsun.",
+      "Ben fark ediyorum.",
+      "Ve galiba seni tanımanın benim için en güzel taraflarından biri de bu. Seni sadece herkesin gördüğü hâlinle değil, zaman içerisinde fark ettiğim küçük ayrıntılarınla tanımak.",
+      "Bir insanın güzelliğinin sadece yüzünde olmadığını sen bana çok güzel gösterdin.",
+      "Seninle konuşurken bazen bir konudan diğerine geçiyoruz ve konuşmanın nereye gittiğini ikimiz de bilmiyoruz. Ama ben o anları seviyorum. Çünkü seninle konuşmanın güzel tarafı, her zaman önemli bir şey konuşmamız değil. Seninle konuşuyor olmam.",
+      "Bazen telefonu kapatmak istemediğimiz o geceleri düşünüyorum.",
+      "Aslında ortada olağanüstü bir şey yok. İki insan konuşuyor. Sonra birimiz yoruluyor, sesi yavaşlıyor, cümleler azalıyor. Ama ben o anlarda bile kendimi çok huzurlu hissediyorum.",
+      "Bir insanın sesini duymanın insana bu kadar iyi gelebileceğini bilmiyordum.",
+      "Şimdi biliyorum.",
+      "Seninle ilgili sevdiğim başka bir şey de şu:",
+      'Sen benim hayatıma girdiğinden beri bazı şeylere bakışım değişti. Gün içerisinde başıma gelen bir şeyi yaşarken, "Bunu Zehra\'ya anlatsam ne derdi?" diye düşündüğüm oluyor. Bir şey gördüğümde "Bunu kesin ona göndermeliyim." dediğim oluyor.',
+      "Yani sen sadece konuştuğum biri olmadın.",
+      "Düşüncelerimin arasına girdin.",
+      "Ve bunu nasıl yaptığını bile anlamadım.",
+      "Belki de seni benim için bu kadar özel yapan şeylerden biri de bu. Seni düşündüğümde içimde yalnızca özlemek olmuyor; sana anlatmak istediğim şeyler, birlikte yapmak istediğim şeyler, paylaşmak istediğim anlar geliyor aklıma.",
+      "Sana baktığımda sadece sevdiğim bir kadını görmüyorum. Aynı zamanda yanında kendim olabildiğim, saatlerce konuşabildiğim, merak ettiğim, öğrenmek istediğim ve hayatını gerçekten önemsemeye başladığım bir insan görüyorum.",
+      "Ben seni değiştirmek istemiyorum.",
+      "Seni kendime benzetmek de istemiyorum.",
+      "Senin Zehra olmanı seviyorum.",
+      "Kendi düşüncelerinle, kendi karakterinle, kendi hayallerinle, kendi doğrularınla...",
+      'Hatta belki seni sevmenin en güzel taraflarından biri de bu. Seni tanıdıkça, "Benim istediğim insan tam olarak böyle olmalı." diye bir kalıba sokmak yerine, sen olduğun için seni sevmeyi öğreniyorum.',
+      "Zehra, bazen seni düşünürken geleceğin çok uzak bir şey olmadığını hissediyorum.",
+      "Çünkü benim aklımdaki gelecek, büyük ve gösterişli şeylerden oluşmuyor.",
+      "Birlikte geçirilen sıradan sabahlar geliyor aklıma.",
+      "Aynı masada oturup kahvaltı etmek, gün içerisinde birbirimize küçük şeyler anlatmak, akşam eve geldiğimizde birbirimizin gününü sormak, yorulduğumuzda yan yana sessizce oturmak...",
+      "Bir gün seninle yaşlanmayı düşündüğümde beni mutlu eden şey tam olarak bunlar.",
+      "Yıllar geçmesine rağmen sana gün içerisinde başıma gelen saçma bir şeyi anlatmak istemek.",
+      "Birlikte güldüğümüz şeyleri yıllar sonra bile hatırlamak.",
+      "Bir yere gittiğimizde yine birbirimize dönüp fikir sormak.",
+      "Ve bütün bunların arasında, hayatın içinde birbirimizin en yakını olmak.",
+      "Ben aslında böyle bir ömür istiyorum.",
+      "İçinde sen olan, seninle anlam kazanan bir hayat.",
+      "Bugün sana bunları yazarken içimden geçen en basit şey ise şu:",
+      "Seni hayatımda çok özel bir yere koydum Zehra.",
+      "Seni özlediğimde bunu bütün kalbimle hissediyorum. Seni gördüğümde içimde oluşan mutluluğu tarif etmekte zorlanıyorum. Sesini duyduğumda günümün değiştiğini fark ediyorum.",
+      "Ve bütün bunların arasında sana karşı hissettiğim şey her geçen gün biraz daha derinleşiyor.",
+      "Belki sana her şeyi her zaman istediğim kadar güzel anlatamıyorum.",
+      "Ama sana verdiğim değerin ne kadar büyük olduğunu bilmeni istiyorum.",
+      "Çünkü sen benim için yalnızca güzel günlerimde hatırladığım biri değilsin.",
+      "Hayatımın içinde yerini çoktan almış, varlığına alıştığım ve yokluğunu hissettiğim insansın.",
+      "Seni seviyorum Zehra.",
+      "Sana karşı hissettiğim şeyin en güzel tarafı da, bunu her gün yeniden hissetmem.",
+      "Bazen bir mesajında, bazen sesinde, bazen bir bakışında, bazen de seni özlediğimi fark ettiğim o küçücük anda...",
+      "Ve sanırım sana söylemek istediğim son şey şu:",
+      "Ben hayatımın güzel taraflarını seninle paylaşmak istiyorum.",
+      "Sevincimi, heyecanımı, hayallerimi, sıradan günlerimi...",
+      "Birlikte biriktireceğimiz anıları düşünüyorum.",
+      'Ve bütün bunların içinde en çok da, yıllar sonra bugünleri hatırlayıp "İyi ki birbirimizi bulmuşuz." diyebilmeyi istiyorum.',
+      "İyi ki varsın Zehra.",
+      "İyi ki hayatımdasın.",
+    ],
+    closing: "Seni çok seviyorum.",
+    signature: "Yusuf",
+  },
+  {
     id: "2026-08-02",
     title: "56. Gün",
     date: "2 Ağustos 2026",
@@ -304,8 +374,9 @@ let isAnimating = false;
 let ytPlayer = null;
 let musicStarted = false;
 let musicStopped = false;
-let musicPending = false;
+let musicWanted = false;
 let musicWatchTimer = null;
+let ignoreEndedUntil = 0;
 let letterRevealTimer = null;
 let petalCleanupTimer = null;
 let letters = [];
@@ -467,10 +538,15 @@ function loadLetters() {
 
     letters.sort((a, b) => String(b.dateTime).localeCompare(String(a.dateTime)));
 
+    const newestSeedId = SEED_LETTERS[0].id;
+    const isNewSeed = !byId.has(newestSeedId);
+
     const preferred =
-      parsed.activeId && letters.some((item) => item.id === parsed.activeId)
-        ? parsed.activeId
-        : letters[0]?.id;
+      isNewSeed
+        ? newestSeedId
+        : parsed.activeId && letters.some((item) => item.id === parsed.activeId)
+          ? parsed.activeId
+          : letters[0]?.id;
 
     activeLetterId = preferred || SEED_LETTERS[0].id;
     saveLetters();
@@ -500,10 +576,41 @@ function getActiveLetter() {
 
 function getMusicConfig() {
   const current = getActiveLetter();
+  const music = current?.music || {};
+  const videoId =
+    extractYouTubeId(music.url) ||
+    extractYouTubeId(music.videoId) ||
+    DEFAULT_MUSIC.videoId;
+
   return {
-    videoId: current?.music?.videoId || DEFAULT_MUSIC.videoId,
-    endSec: Number(current?.music?.endSec) || DEFAULT_MUSIC.endSec,
+    videoId,
+    endSec: Number(music.endSec) || DEFAULT_MUSIC.endSec,
   };
+}
+
+function extractYouTubeId(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+
+  // Düz video id
+  if (/^[\w-]{11}$/.test(raw)) return raw;
+
+  try {
+    const url = new URL(raw);
+    if (url.hostname.includes("youtu.be")) {
+      return url.pathname.split("/").filter(Boolean)[0] || "";
+    }
+    const fromQuery = url.searchParams.get("v");
+    if (fromQuery) return fromQuery;
+    const parts = url.pathname.split("/").filter(Boolean);
+    const embedIndex = parts.findIndex((part) => part === "embed" || part === "shorts");
+    if (embedIndex >= 0 && parts[embedIndex + 1]) return parts[embedIndex + 1];
+  } catch (_) {
+    /* ignore */
+  }
+
+  const match = raw.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/);
+  return match?.[1] || "";
 }
 
 function setLetterContent({
@@ -703,27 +810,15 @@ function clearMusicWatch() {
 }
 
 function pauseMusic() {
-  clearMusicWatch();
+  musicWanted = false;
   musicStarted = false;
-
-  try {
-    ytPlayer?.pauseVideo();
-  } catch (_) {
-    /* ignore */
-  }
+  destroyMusicPlayer();
 }
 
 function stopMusic() {
-  if (musicStopped) return;
+  musicWanted = false;
   musicStopped = true;
-  clearMusicWatch();
-
-  try {
-    ytPlayer?.pauseVideo();
-    ytPlayer?.stopVideo();
-  } catch (_) {
-    /* ignore */
-  }
+  destroyMusicPlayer();
 }
 
 function watchMusicProgress() {
@@ -742,84 +837,57 @@ function watchMusicProgress() {
   }, 250);
 }
 
-function startMusic() {
-  if (!isOpen || musicStopped || !ytPlayer) return;
+function forcePlayMusic() {
+  if (!ytPlayer || !isOpen || musicStopped) return;
 
   try {
     ytPlayer.unMute?.();
     ytPlayer.setVolume?.(100);
     ytPlayer.playVideo();
   } catch (_) {
-    /* ignore — tarayıcı otomatik sesi engelleyebilir */
+    /* ignore */
+  }
+}
+
+function destroyMusicPlayer() {
+  clearMusicWatch();
+
+  if (ytPlayer) {
+    try {
+      ytPlayer.destroy?.();
+    } catch (_) {
+      /* ignore */
+    }
+    ytPlayer = null;
+  }
+
+  const mount = document.querySelector(".music-embed");
+  if (mount) {
+    mount.innerHTML = '<div id="youtube-player"></div>';
   }
 }
 
 function playLetterMusic() {
-  musicPending = true;
-
-  if (!ytPlayer) return;
-
-  const { videoId, endSec } = getMusicConfig();
-  clearMusicWatch();
+  musicWanted = true;
   musicStopped = false;
   musicStarted = false;
+  ignoreEndedUntil = Date.now() + 2000;
 
-  try {
-    ytPlayer.loadVideoById({
-      videoId,
-      startSeconds: 0,
-      endSeconds: endSec,
-    });
-    ytPlayer.unMute?.();
-    ytPlayer.setVolume?.(100);
-    ytPlayer.playVideo();
-    musicPending = false;
-  } catch (_) {
-    /* ignore */
-  }
-}
-
-function onPlayerReady() {
-  if (musicPending && isOpen) {
-    playLetterMusic();
+  if (!window.YT || !window.YT.Player) {
     return;
   }
 
   const { videoId, endSec } = getMusicConfig();
-  try {
-    ytPlayer.cueVideoById({
-      videoId,
-      startSeconds: 0,
-      endSeconds: endSec,
-    });
-  } catch (_) {
-    /* ignore */
-  }
-}
+  if (!videoId) return;
 
-function onPlayerStateChange(event) {
-  // 1 = PLAYING
-  if (event.data === 1 && !musicStarted) {
-    musicStarted = true;
-    musicPending = false;
-    watchMusicProgress();
-  }
-
-  // 0 = ENDED (end param veya video bitti)
-  if (event.data === 0) {
-    stopMusic();
-  }
-}
-
-window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
-  const { videoId, endSec } = getMusicConfig();
+  destroyMusicPlayer();
 
   ytPlayer = new YT.Player("youtube-player", {
     width: 320,
     height: 180,
     videoId,
     playerVars: {
-      autoplay: 0,
+      autoplay: 1,
       controls: 0,
       disablekb: 1,
       fs: 0,
@@ -830,18 +898,69 @@ window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
       end: endSec,
     },
     events: {
-      onReady: onPlayerReady,
+      onReady(event) {
+        try {
+          event.target.unMute();
+          event.target.setVolume(100);
+          event.target.playVideo();
+        } catch (_) {
+          /* ignore */
+        }
+
+        // Ses engellenirse mute -> play -> unmute
+        window.setTimeout(() => {
+          if (!musicWanted || musicStopped || !isOpen || !ytPlayer) return;
+          try {
+            if (ytPlayer.getPlayerState?.() !== 1) {
+              ytPlayer.mute?.();
+              ytPlayer.playVideo?.();
+              window.setTimeout(() => {
+                if (!musicWanted || musicStopped || !isOpen) return;
+                forcePlayMusic();
+              }, 400);
+            }
+          } catch (_) {
+            /* ignore */
+          }
+        }, 500);
+      },
       onStateChange: onPlayerStateChange,
     },
   });
+}
+
+function onPlayerStateChange(event) {
+  // 1 = PLAYING
+  if (event.data === 1) {
+    musicStarted = true;
+    try {
+      ytPlayer.unMute?.();
+      ytPlayer.setVolume?.(100);
+    } catch (_) {
+      /* ignore */
+    }
+    watchMusicProgress();
+  }
+
+  // 0 = ENDED
+  if (event.data === 0) {
+    if (Date.now() < ignoreEndedUntil) return;
+    stopMusic();
+  }
+}
+
+window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
+  if (musicWanted && isOpen) {
+    playLetterMusic();
+  }
 };
 
 document.addEventListener("pointerdown", () => {
-  if (isOpen && !musicStopped) startMusic();
+  if (isOpen && !musicStopped) forcePlayMusic();
 });
 
 document.addEventListener("keydown", () => {
-  if (isOpen && !musicStopped) startMusic();
+  if (isOpen && !musicStopped) forcePlayMusic();
 });
 
 window.setLetterContent = setLetterContent;
