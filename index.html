@@ -21,7 +21,7 @@
       <p class="gate-eyebrow" id="gateEyebrow">Sadece bizim bildiğimiz</p>
       <h1 class="gate-title" id="gateTitle">Bir soru</h1>
       <p class="gate-question" id="gateQuestion">
-        İkimizin doğum tarihleri rakamları toplamı kaçtır?
+        Yusuf'un en sevdiği yer neresidir?
       </p>
       <label class="gate-label" for="gateAnswer">Cevabın</label>
       <input
@@ -29,13 +29,13 @@
         id="gateAnswer"
         name="answer"
         type="text"
-        inputmode="numeric"
-        pattern="[0-9]*"
-        maxlength="4"
+        maxlength="32"
         placeholder="?"
         required
         autofocus
         enterkeyhint="go"
+        autocomplete="off"
+        autocapitalize="words"
       />
       <p class="gate-error" id="gateError" role="alert" hidden>Yanlış cevap, bir daha dene.</p>
       <button class="gate-submit" type="submit">Aç</button>

@@ -21,20 +21,12 @@ const GATE_KEY = "zehra-gate-unlocked";
 const GATE_FAIL_COOKIE = "zehra-gate-fails";
 const GATE_FAIL_LIMIT = 3;
 const GATE_UNLOCK_PHRASE = "Yusuf seni çok seviyorum";
+const GATE_ANSWER = "Zehra";
+const GATE_QUESTION = "Yusuf'un en sevdiği yer neresidir?";
 const DEFAULT_MUSIC = { videoId: "T1bDNsX6_lA", endSec: 64 };
 const LETTER_REVEAL_MS = 1250;
 const PETAL_CLEANUP_MS = 11000;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-// 15/10/1995 + 12/02/1997 → tüm rakamların toplamı
-function sumDigits(value) {
-  return String(value)
-    .replace(/\D/g, "")
-    .split("")
-    .reduce((total, digit) => total + Number(digit), 0);
-}
-
-const GATE_ANSWER = sumDigits("15101995") + sumDigits("12021997"); // 62
 
 function getCookie(name) {
   const encoded = `${encodeURIComponent(name)}=`;
@@ -79,6 +71,10 @@ function normalizePhrase(value) {
 
 function isPhraseUnlock(value) {
   return normalizePhrase(value) === normalizePhrase(GATE_UNLOCK_PHRASE);
+}
+
+function isGateAnswer(value) {
+  return normalizePhrase(value) === normalizePhrase(GATE_ANSWER);
 }
 
 function isGateUnlocked() {
@@ -149,23 +145,20 @@ function setGateMode(mode) {
   if (gateQuestion) {
     gateQuestion.textContent = hardLock
       ? "Siteyi açmak için şunu yaz: Yusuf seni çok seviyorum"
-      : "İkimizin doğum tarihleri rakamları toplamı kaçtır?";
+      : GATE_QUESTION;
   }
 
   if (gateAnswer) {
     gateAnswer.value = "";
+    gateAnswer.removeAttribute("inputmode");
+    gateAnswer.removeAttribute("pattern");
+    gateAnswer.type = "text";
     if (hardLock) {
-      gateAnswer.removeAttribute("inputmode");
-      gateAnswer.removeAttribute("pattern");
       gateAnswer.setAttribute("maxlength", "64");
       gateAnswer.placeholder = "Yaz…";
-      gateAnswer.type = "text";
     } else {
-      gateAnswer.setAttribute("inputmode", "numeric");
-      gateAnswer.setAttribute("pattern", "[0-9]*");
-      gateAnswer.setAttribute("maxlength", "4");
+      gateAnswer.setAttribute("maxlength", "32");
       gateAnswer.placeholder = "?";
-      gateAnswer.type = "text";
     }
   }
 
@@ -187,7 +180,7 @@ function initGate() {
   }
 
   lockSite();
-  setGateMode(getFailCount() >= GATE_FAIL_LIMIT ? "phrase" : "number");
+  setGateMode(getFailCount() >= GATE_FAIL_LIMIT ? "phrase" : "question");
   window.setTimeout(() => gateAnswer?.focus(), 80);
 }
 
@@ -212,9 +205,7 @@ gateForm?.addEventListener("submit", (event) => {
     return;
   }
 
-  const numeric = Number(raw.replace(/\D/g, ""));
-
-  if (numeric === GATE_ANSWER) {
+  if (isGateAnswer(raw)) {
     unlockSite();
     return;
   }
@@ -240,6 +231,97 @@ gateForm?.addEventListener("submit", (event) => {
 initGate();
 
 const SEED_LETTERS = [
+  {
+    id: "2026-08-15",
+    title: "Son 6 Gün",
+    date: "15 Ağustos 2026",
+    dateTime: "2026-08-15",
+    music: {
+      url: "https://www.youtube.com/watch?v=WZemo2VoD4k",
+      videoId: "WZemo2VoD4k",
+      endSec: 265, // 4:25
+    },
+    greeting: "Zehra'm,",
+    body: [
+      "İzmir'e gelmeme altı gün kaldı.",
+      "Ve sanırım bu sefer ilk gelişimden daha farklı bir heyecan var içimde. Çünkü artık seni ilk defa görmeye gitmiyorum. Seni tanıyorum, seni özlüyorum ve şimdi ikinci kez yanına geliyorum.",
+      "Gerçi sen bana \"Seni görünce tanımam belki.\" diyorsun ya...",
+      "Sen hiç merak etme, ben seni görünce tanırım. 😂",
+      "Hatta sen beni tanımasan bile ben seni tanırım. O kadarını da kendime güveniyorum artık. Hem zaten seni ilk gördüğümde de tanımıştım. Şimdi aradan geçen bunca konuşmadan, bunca zamandan sonra seni tanımamam mümkün mü?",
+      "7 Haziran'dan bugüne kadar düşündüğümde, aslında ne kadar çok şey yaşadığımızı fark ediyorum.",
+      "Bir insanla konuşmaya başladık ve fark etmeden birbirimizin günlük hayatının içine girdik. Sonra konuşmalar uzadı, geceler uzadı, birbirimize anlatacak şeyler hiç bitmedi. Bir noktadan sonra gün içerisinde yaşadığım bir şeyi sana anlatmak istemeye, senin ne düşündüğünü merak etmeye başladım.",
+      "Sonra seni gördüm.",
+      "Ve bütün o konuşmaların karşısında gerçek bir Zehra vardı.",
+      "İlk buluşmadan sonra da benim için bir şey değişti. Seni sadece konuştuğum bir insan olarak değil, gerçekten hayatımda görmek istediğim bir kadın olarak görmeye başladım.",
+      "Şimdi ikinci kez İzmir'e gelirken bunu çok daha net hissediyorum.",
+      "Seni görmek için gün sayıyorum.",
+      "Seninle birkaç gün geçirmek, yine saatlerce konuşmak, birlikte bir yerlere gitmek, yemek yemek, yürümek, gülmek... Bunların hiçbirinin benim için küçük bir anlamı yok.",
+      "Ben seninle vakit geçirmekten gerçekten çok büyük bir mutluluk duyuyorum.",
+      "Hatta bazen sadece seninle konuşmuş olmak bile günümü güzelleştiriyor.",
+      "Bunu özellikle söylemek istiyorum çünkü benim için senin hayatımdaki yerin artık normal bir yer değil.",
+      "Aklımda herkesin girebildiği bir bölüm var.",
+      "Bir de senin için ayrılmış, kimsenin yerini alamayacağı, sadece sana ait bir yer var.",
+      "Sen tam olarak oradasın.",
+      "Aklımın en derininde, kendime bile her zaman anlatamadığım bir yerde.",
+      "Oraya seni ben koydum.",
+      "Ve oradaki yerini de başka hiçbir şeyle doldurmak istemiyorum.",
+      "Belki sana bazen bunu yeterince belli edemiyorum. Belki bazı şeyleri söylerken istediğim kadar düzgün ifade edemiyorum. Ama sana karşı hissettiğim şeyin ne kadar büyüdüğünü ben kendi içimde çok net görüyorum.",
+      "Çünkü seni düşünmediğim bir gün neredeyse yok.",
+      "Bir şey olduğunda sana anlatmak istiyorum.",
+      "Bir şey gördüğümde senin ne diyeceğini düşünüyorum.",
+      "Bir yere gittiğimde sen olsan ne yapardın diye aklımdan geçiriyorum.",
+      "Ve bazen hiçbir sebep yokken sadece seni özlüyorum.",
+      "Bütün bunların benim için ne anlama geldiğini artık biliyorum.",
+      "Ben seni çok seviyorum.",
+      "Ayrıca seninle geçirdiğim hiçbir zamandan pişman değilim.",
+      "Her şeyin çok güzel olduğu zamanlarımız da oldu, ikimizin de birbirini anlamakta zorlandığı zamanlarımız da. Bazen birbirimizi kırdık, bazen saçma sapan şeylerin içinde kaldık.",
+      "Ama bugün dönüp baktığımda bazı durumların haricinde hiçbirine \"Keşke yaşanmasaydı.\" demiyorum.",
+      "Çünkü bütün bunların içerisinde seni tanıdım.",
+      "Seni biraz daha anladım.",
+      "Kendimi de biraz daha tanıdım.",
+      "Ve bütün bunların sonunda sevgim sana karşı asla eksilmedi.",
+      "Tam tersine.",
+      "Daha da büyüdü.",
+      "Şimdi geleceği düşündüğümde de seni orada görmek bana çok normal geliyor.",
+      "Hatta bazen kendimi yakalıyorum; daha ortada hiçbir şey yokken bile seninle ileride nasıl bir hayatımız olur diye düşünüyorum.",
+      "Birlikte yaşayacağımız evi, beraber kahvaltı etmeyi, gün sonunda birbirimize günümüzü anlatmayı...",
+      "Ama benim asıl istediğim bunların kendisi değil.",
+      "Ben hayatın kendisini seninle paylaşmak istiyorum.",
+      "İyi bir günüm olduğunda da sen ol.",
+      "Canım bir şey istediğinde de sen ol.",
+      "Bir yere gitmek istediğimde de sen ol.",
+      "Yıllar sonra bile başıma gelen saçma bir şeyi ilk sana anlatmak isteyeyim.",
+      "Benim için gelecek fikrinin güzel tarafı bu.",
+      "İçinde sen olması.",
+      "Ve galiba bu yüzden İzmir'e ikinci kez geliyor olmak benim için sadece birkaç gün birlikte vakit geçirmek değil.",
+      "Ben o birkaç günü çok önemsiyorum.",
+      "Çünkü seni özledim.",
+      "Seni görmek istiyorum.",
+      "Yüzüne bakmak, yanında oturmak ve yine saatlerce konuşmak istiyorum.",
+      "Altı gün sonra bunların hepsi gerçek olacak.",
+      "Ve sen o gün beni görüp \"Bu kimdi ya?\" falan dersen gerçekten çok gülerim.",
+      "Ama ben seni görünce kesin tanırım.",
+      "Hem de hiç düşünmeden.",
+      "Çünkü sen artık benim için sadece yüzünü bildiğim biri değilsin.",
+      "Sen benim zihnimin en derininde kendine ait bir yeri olan kadınsın.",
+      "Ve senin yerinin başka biriyle doldurulması gibi bir ihtimal de yok.",
+      "Ben seni çok seviyorum Zehra.",
+      "Bazen bunu tek bir cümleyle anlatmaya çalışıyorum ama yetmiyor.",
+      "O yüzden bugün sadece şunu bilmeni istiyorum:",
+      "7 Haziran'dan bugüne hayatımda seninle ilgili biriken ne varsa, hepsinin toplamı benim için çok değerli.",
+      "Konuşmalarımız, gecelerimiz, ilk buluşmamız, birlikte geçirdiğimiz zamanlar, seni özlediğim günler, seni düşündüğüm anlar...",
+      "Hepsi.",
+      "Ve şimdi ikinci kez yanına geliyorum.",
+      "Bu defa seni tanımaya değil.",
+      "Seni özlemiş olarak geliyorum.",
+    ],
+    closing: [
+      "Altı gün sonra görüşürüz güzelim.",
+      "Ve merak etme...",
+      "Ben seni tanırım. ❤️",
+    ],
+    signature: "Yusuf",
+  },
   {
     id: "2026-08-09",
     title: "İkinci Ayımız <3",
