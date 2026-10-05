@@ -24,6 +24,7 @@ const GATE_UNLOCK_PHRASE = "Yusuf seni çok seviyorum";
 const GATE_ANSWER = "Zehra";
 const GATE_QUESTION = "Yusuf'un en sevdiği yer neresidir?";
 const DEFAULT_MUSIC = { videoId: "T1bDNsX6_lA", endSec: 64 };
+const START_LETTER_ID = "2026-08-25"; // Geç Mektup — varsayılan başlangıç
 const LETTER_REVEAL_MS = 1250;
 const PETAL_CLEANUP_MS = 11000;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -231,6 +232,94 @@ gateForm?.addEventListener("submit", (event) => {
 initGate();
 
 const SEED_LETTERS = [
+  {
+    id: "2026-09-15",
+    title: "100. Gün",
+    date: "15 Eylül 2026",
+    dateTime: "2026-09-15",
+    music: {
+      url: "https://www.youtube.com/watch?v=BkuGka1NNCc",
+      videoId: "BkuGka1NNCc",
+      endSec: 224, // 3:44
+    },
+    greeting: "Sevdiceğim ;",
+    body: [
+      "Bugün 100. günümüz. Hayatımın şuan için en güzel 100 günü. Bir süredir mektuplarım nerde diye soruyorsun. Mektupların bende hayatımın anlamı.",
+      "Dün ve bugün çok yoğun bir süreçteydim. sana bunu anlatmak için çok sabırsızlanıyorum. Ama şimdi konumu bu değil.",
+      "Seni ilk gördüğüm andan itibaren inşallah diye dua ettim. İnşallah anlaşırız. İnşallah beni sever. İnşallah benden hoşlanır vs. vs. Bugün çok şükür rabbim dualarımı kabul etmiş ve 100 gündür bir tanemle geçmiş.",
+      "Sen benim için çok özelsin. Seni çok seviyorum. İyiki hayatımın bu 100 günü senle geçti. Her anı harika her anı çok güzeldi. Eğer hayırlısı ise rabbim ortak bir hayat yaşamamızı nasip etsin. Bu 100 günde anladığın en önemli şey. Seni ne kadar çok sevdiğim.",
+    ],
+    closing: "Seni çok seviyorum sevdiceğim.",
+    signature: "Yusuf",
+  },
+  {
+    id: "2026-09-10",
+    title: "Telafi",
+    date: "10 Eylül 2026",
+    dateTime: "2026-09-10",
+    music: {
+      url: "https://www.youtube.com/watch?v=BkuGka1NNCc",
+      videoId: "BkuGka1NNCc",
+      endSec: 224, // 3:44
+    },
+    greeting: "Benim biricik sevdiğim.",
+    body: [
+      "Normalde mektuplarımda serzenişte bulunmam ama bu hafta beni biraz fazla üzdün. Ama çok şükür şuan için aramız çok iyi.",
+      "Yarın annenin sonucunu öğreneceksin. Bu süreçte ilk süreçte yaptığımı asla tekrar etmeden çok bişeyden anlamasam da elimden geldiğince yanında olmaya çalıştım.İnşallah rabbim hayırlı haberler almayı nasip eder.",
+      "Canımın içi , herşeyim insan her türlü hata yapabilir. Genelde de bunların dönüşü olur. Ama benimkinin pek dönüşü yok gibi. Zamanı geri alamıyorum. Ama bilmeni isterim ki , senle sadece iki anımın olmamasını istemezdim. Biride annenin ameliyat günü.Bazen mantıklı olayım derken saçmalıyorum. Hayatımın anlamı sen bana senden bazı şeyleri beklemiyorum dediğinde için sıkılıyor. Ama hak veriyorum. Ama ne olursa olsun yanında olavağımı bil.",
+      "Canımın içi inşallah bununda üstesinde beraber geliriz. Seni her zaman çok sevdim ve seveceğim.",
+    ],
+    closing: "",
+    signature: "Yusuf",
+  },
+  {
+    id: "2026-09-03",
+    title: "Huysuz ZRT",
+    date: "3 Eylül 2026",
+    dateTime: "2026-09-03",
+    music: {
+      url: "https://www.youtube.com/watch?v=BkuGka1NNCc",
+      videoId: "BkuGka1NNCc",
+      endSec: 224, // 3:44
+    },
+    greeting: "Hayatım,",
+    body: [
+      "Bu hafta birbirimizi kırdığımız , yanlış anladığımız ve birbirimizi istemeden üzdüğümüz zamanlar oldu.",
+      "Ben kendi adıma  seni yeterince dinlemeden, kendimi anlatmaya fazla odaklandığımın farkındayım. Bazen haklı çıkmaya çalışırken senin ne hissettiğini ikinci plana attıyorum.",
+      "Bu gerçekten doğru değil ama ben bizim için bir gelecek planı yapmaya çalışıyorum. Malesef ki bu pek kolay olmuyor.",
+      "Seni kırmayı hiç istemiyorum. Ama bundan daha fazla ne istemiyorsun dersen. Senin benden  uzaklaşman derim.",
+      "Ben seninle herşeyi aşabileceğimi düşünüyorum. her ne kadar kabul etmesende ben sırtımı sana dayamak senden güç alabileceğimi bilmek istiyorum",
+      "Ben senden asla mükemmel olmanı beklemiyorum. Sende benden bunu beklemiyorsun. Ama bu hafta bir konuda eminim ki biz uzaklaşınca kavga ediyoruz.Ama ne olursa olsun",
+    ],
+    closing: [
+      "Seni çook seviyorum.",
+      "Bu hiçbir zaman değişmeyecek.",
+    ],
+    signature: "Yusuf",
+  },
+  {
+    id: "2026-08-25",
+    title: "Geç Mektup",
+    date: "25 Ağustos 2026",
+    dateTime: "2026-08-25",
+    music: {
+      url: "https://www.youtube.com/watch?v=BkuGka1NNCc",
+      videoId: "BkuGka1NNCc",
+      endSec: 224, // 3:44
+    },
+    greeting: "Zehra’m,",
+    body: [
+      "Bu mektubu sana geç yazıyorum. Sebebi izmirde olmam ama keşke önceden yazsaydım. Hayatımın anlamı seninle konuşmaya başladığımız günden itibaren bugüne kadar olan süreci hayal bile edemezdim.",
+      "Seni tanıdıkça sadece sevdiğim bir insanı değil , hayatımda gerçekten olsun dediğim ve istediğin biri olduğuna eminim. Seninle konuştuğum dinlediğim ve sadece gözlerine baktığım zamanlar benim için çok kıymetli.",
+      "İzmirde sana söylediğim gibi. Ben hayatımı paylaşabileceğim bir yol arkadaşımı bulmuş gibi hissediyorum.",
+      "Daha yolun çok başındayız. Önümüzde inşallah çok güzel zamanlarımız olacak.",
+      "7 Hazirandan bugüne kadar birgün bile aklımdan çıkmadın",
+      "İyiki seni tanımışım.",
+      "İyiki hayatımdasın.",
+    ],
+    closing: "Seni çok seviyorum.",
+    signature: "Yusuf",
+  },
   {
     id: "2026-08-15",
     title: "Son 6 Gün",
@@ -462,7 +551,7 @@ let ignoreEndedUntil = 0;
 let letterRevealTimer = null;
 let petalCleanupTimer = null;
 let letters = [];
-let activeLetterId = SEED_LETTERS[0].id;
+let activeLetterId = START_LETTER_ID;
 let archiveOpen = false;
 
 const PETAL_PALETTE = [
@@ -596,7 +685,8 @@ function loadLetters() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) {
       letters = structuredClone(SEED_LETTERS);
-      activeLetterId = letters[0].id;
+      letters.sort((a, b) => String(b.dateTime).localeCompare(String(a.dateTime)));
+      activeLetterId = START_LETTER_ID;
       saveLetters();
       return;
     }
@@ -620,21 +710,15 @@ function loadLetters() {
 
     letters.sort((a, b) => String(b.dateTime).localeCompare(String(a.dateTime)));
 
-    const newestSeedId = SEED_LETTERS[0].id;
-    const isNewSeed = !byId.has(newestSeedId);
-
-    const preferred =
-      isNewSeed
-        ? newestSeedId
-        : parsed.activeId && letters.some((item) => item.id === parsed.activeId)
-          ? parsed.activeId
-          : letters[0]?.id;
-
-    activeLetterId = preferred || SEED_LETTERS[0].id;
+    // Her girişte Geç Mektup'tan başla
+    activeLetterId = letters.some((item) => item.id === START_LETTER_ID)
+      ? START_LETTER_ID
+      : letters[0]?.id || START_LETTER_ID;
     saveLetters();
   } catch (_) {
     letters = structuredClone(SEED_LETTERS);
-    activeLetterId = letters[0].id;
+    letters.sort((a, b) => String(b.dateTime).localeCompare(String(a.dateTime)));
+    activeLetterId = START_LETTER_ID;
   }
 }
 
@@ -653,7 +737,24 @@ function saveLetters() {
 }
 
 function getActiveLetter() {
-  return letters.find((item) => item.id === activeLetterId) || letters[0] || SEED_LETTERS[0];
+  return (
+    letters.find((item) => item.id === activeLetterId) ||
+    letters.find((item) => item.id === START_LETTER_ID) ||
+    letters[0] ||
+    SEED_LETTERS.find((item) => item.id === START_LETTER_ID) ||
+    SEED_LETTERS[0]
+  );
+}
+
+function getStartLetterDateTime() {
+  const start =
+    letters.find((item) => item.id === START_LETTER_ID) ||
+    SEED_LETTERS.find((item) => item.id === START_LETTER_ID);
+  return start?.dateTime || "2026-08-25";
+}
+
+function isNewArchiveLetter(item) {
+  return String(item.dateTime) > String(getStartLetterDateTime());
 }
 
 function getMusicConfig() {
@@ -740,15 +841,19 @@ function renderArchiveList() {
   archiveList.innerHTML = letters
     .map((item) => {
       const isActive = item.id === activeLetterId;
+      const isNew = isNewArchiveLetter(item);
       return `
         <li>
           <button
             type="button"
-            class="archive-item${isActive ? " is-active" : ""}"
+            class="archive-item${isActive ? " is-active" : ""}${isNew ? " is-new" : ""}"
             data-letter-id="${escapeHtml(item.id)}"
             aria-current="${isActive ? "true" : "false"}"
           >
-            <span class="archive-item-title">${escapeHtml(item.title || item.date)}</span>
+            <span class="archive-item-top">
+              <span class="archive-item-title">${escapeHtml(item.title || item.date)}</span>
+              ${isNew ? '<span class="archive-badge">Yeni</span>' : ""}
+            </span>
             <span class="archive-item-date">${escapeHtml(item.date)}</span>
           </button>
         </li>

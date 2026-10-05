@@ -345,11 +345,31 @@ body.archive-open .archive-panel {
   background: rgba(122, 59, 59, 0.1);
 }
 
+.archive-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
 .archive-item-title {
   display: block;
   font-size: 1.05rem;
   font-weight: 600;
   line-height: 1.2;
+}
+
+.archive-badge {
+  flex-shrink: 0;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f7f1e6;
+  background: linear-gradient(180deg, var(--wax-light), var(--wax));
+  padding: 0.22rem 0.45rem;
+  border-radius: 999px;
 }
 
 .archive-item-date {
