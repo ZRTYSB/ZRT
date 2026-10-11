@@ -25,6 +25,7 @@ const GATE_ANSWER = "Zehra";
 const GATE_QUESTION = "Yusuf'un en sevdiği yer neresidir?";
 const DEFAULT_MUSIC = { videoId: "T1bDNsX6_lA", endSec: 64 };
 const START_LETTER_ID = "2026-08-25"; // Geç Mektup — varsayılan başlangıç
+const NEW_BADGE_LETTER_ID = "2026-10-11"; // yalnızca bu mektupta "Yeni" rozeti
 const LETTER_REVEAL_MS = 1250;
 const PETAL_CLEANUP_MS = 11000;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -232,6 +233,32 @@ gateForm?.addEventListener("submit", (event) => {
 initGate();
 
 const SEED_LETTERS = [
+  {
+    id: "2026-10-11",
+    title: "Yanındayım",
+    date: "11 Ekim 2026",
+    dateTime: "2026-10-11",
+    music: {
+      url: "https://youtu.be/oKJqORouB8w",
+      videoId: "oKJqORouB8w",
+      endSec: 225, // 3:45
+    },
+    greeting: "Hayatımın anlamı, birtanecik sevdiğim…",
+    body: [
+      "Öncelikle şunu bilmeni istiyorum hayatım, bugün konuştuklarımızın seni bu kadar üzmesini ben de istemezdim. Seni kırmak, kendini değersiz hissetmene sebep olmak ya da sana senden uzaklaşmak istediğimi düşündürmek benim isteyeceğim en son şeylerden biri. Çünkü ben senden uzaklaşmak istediğimi söylemedim. Ben, bazı şeyler yüzünden kendimi senden uzaklaştırılıyormuş gibi hissettiğimi anlatmaya çalıştım. Belki bunu anlatırken kendimi doğru ifade edemedim, belki ikimiz de birbirimizi anlamakta zorlandık ama içimde olan şey senin düşündüğün gibi senden vazgeçmek değildi.",
+      "İzmir'e gelmek için sana müsait olup olmadığını sorduğumda aslında seninle görüşmeyi istiyordum. Seni görmek, seninle vakit geçirmek, biraz olsun yanında olmak istiyordum. Sana bunu sorarken senden gelecek cevabı da önemsiyordum. Çünkü insan sevdiği kişiyi görmek istediğinde yalnızca bir plan yapmıyor, o kişinin de kendisini görmek isteyip istemediğini merak ediyor. Ben de senin beni görmek istediğini hissetmek istedim. Bana “bakarız” dediğinde ne düşüneceğimi bilemedim. Belki senin aklında bambaşka şeyler vardı, belki beni kendimi mecbur hissetmekten korumaya çalışıyordun. Ama ben o an senin beni görmek isteyip istemediğini anlayamadım. Sonra da bunu sana kendi kırgınlığımın içinden anlatmaya çalıştım.",
+      "Ben seninle bir şeyleri zorla yaşamak istemiyorum. Beni görmek zorundaymışsın, benim için bir şey yapmak zorundaymışsın ya da sırf söz verdin diye bir planı gerçekleştirmek zorundaymışsın gibi hissetmeni de istemem. Benim istediğim şey bunların mecburiyetten değil, ikimizin de içinden gelerek olması. Senin de benimle görüşmek istemen, benimle vakit geçirmekten mutlu olman, bazen senin de beni görmek için heveslenmen. Bunlar benim için kıymetli. Çünkü ben senin hayatında yalnızca yerine getirilmesi gereken bir sözün ya da yapılması gereken bir planın parçası olmak istemiyorum. Senin kendi isteğinle yanında tuttuğun, varlığına sevindiğin insan olmak istiyorum. Tıpkı benim seni kendi hayatımda istediğim gibi.",
+      "Defalarca kez söylediğim gibi herhangi bir şey seni sevmediğim ya da senden vazgeçebileceğim anlamına gelmiyor. Tam tersine, sen benim için önemli olduğundan bu kadar çok takılıyorum sözlerine. Herhangi biriyle aramda böyle bir şey yaşasam belki üzerinde bu kadar durmam. Ama söz konusu sen olduğunda bazı şeyler içime dokunuyor. Çünkü ben seninle aramızdaki bağı önemsiyorum. Seninle geçirdiğim zamanı, yaptığımız planları, konuşmalarımızı, birbirimize anlattığımız küçücük şeyleri bile önemsiyorum. Seni hayatımda öylesine bulunan biri olarak görmüyorum ki seninle ilgili hissettiklerim de öylesine olsun.",
+      "Bugün seni üzdüğüm için gerçekten üzgünüm. Özellikle de sözlerimin sende benden uzaklaşıyormuşum gibi bir his bırakmasına üzüldüm. Çünkü benim anlatmaya çalıştığım şey bu değildi. Ben seninle arama mesafe koymak değil, aramızdaki mesafenin neden oluştuğunu anlamak istiyorum. Aramızda mesafe oluştu derken telefonu kapatmaktan bahsediyorum. Bunu dert edinip aramıza bir mesafe koymaktan bahsetmiyorum.",
+      "Seni seviyorum Zehram. Bunu yalnızca güzel günlerimizde değil, birbirimizi anlamakta zorlandığımız zamanlarda da bilmeni istiyorum. Benim için değerin bir tartışmayla, yanlış anlaşılmayla ya da bir kırgınlıkla değişemez. Sen benim hayatımda çok özel bir yere sahipsin.",
+      "Ben seninle güzel günler yaşamak istiyorum. Birlikte planlar yapmak, birbirimizi görmek için heyecanlanmak, sıradan bir günü bile güzel bir anıya çevirmek istiyorum. Bazen senin bana, bazen benim sana koşarak geldiğimiz; ikimizin de kendini sevildiği kadar istendiğini de hissettiği bir ilişkimiz olsun istiyorum. Çünkü benim hayalim yalnızca birbirimizi sevmemiz değil, bu sevgiyi birbirimize hissettirebilmemiz.",
+      "Seni çok seviyorum, canımın içi. Bugün yaşadığımız kırgınlığın sana olan sevgimi değiştirmediğini, senden uzaklaşmak istemediğimi ve aslında seninle aramızdaki şeyin daha güzel olmasını istediğimi bu mektupta tekrar tekrar dile getirmeye çalıştım.",
+      "Her ne olursa olsun hiçbir şeyi tek başına çözmek zorunda değilsin. Her ne olursa olsun her zaman senin yanındayım. Buna inanmıyorsun şuan için farkındayım. Zamanla anlarsın.",
+      "Son olarak misafirlerin suyunu yemeğini veriyorum demek benim için çok ayıp bir şey. Misafir dediğin evine gelen kişi hoş karşılanır , ikramda bulunulur vs. Bunun aksini yaptığını düşünmüyorum ama dediğim gibi ben bunu senden duymayı hiç beklemezdim.",
+    ],
+    closing: "Seni çok seviyorum, birtanem.",
+    signature: "Yusuf",
+  },
   {
     id: "2026-09-15",
     title: "100. Gün",
@@ -746,15 +773,8 @@ function getActiveLetter() {
   );
 }
 
-function getStartLetterDateTime() {
-  const start =
-    letters.find((item) => item.id === START_LETTER_ID) ||
-    SEED_LETTERS.find((item) => item.id === START_LETTER_ID);
-  return start?.dateTime || "2026-08-25";
-}
-
 function isNewArchiveLetter(item) {
-  return String(item.dateTime) > String(getStartLetterDateTime());
+  return item.id === NEW_BADGE_LETTER_ID;
 }
 
 function getMusicConfig() {
