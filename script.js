@@ -7,232 +7,47 @@ const archiveBtn = document.getElementById("archiveBtn");
 const archivePanel = document.getElementById("archivePanel");
 const archiveList = document.getElementById("archiveList");
 const petalField = document.getElementById("petalField");
-const gate = document.getElementById("gate");
-const gateForm = document.getElementById("gateForm");
-const gateAnswer = document.getElementById("gateAnswer");
-const gateError = document.getElementById("gateError");
-const gateEyebrow = document.getElementById("gateEyebrow");
-const gateTitle = document.getElementById("gateTitle");
-const gateQuestion = document.getElementById("gateQuestion");
+const landing = document.getElementById("landing");
+const goLettersBtn = document.getElementById("goLettersBtn");
+const countdownGrid = document.getElementById("countdownGrid");
+const countdownDone = document.getElementById("countdownDone");
+const ambientHearts = document.getElementById("ambientHearts");
 const archiveMenu = document.querySelector(".archive-menu");
 
 const STORAGE_KEY = "zehra-letters-v1";
-const GATE_KEY = "zehra-gate-unlocked";
-const GATE_FAIL_COOKIE = "zehra-gate-fails";
-const GATE_FAIL_LIMIT = 3;
-const GATE_UNLOCK_PHRASE = "Yusuf seni çok seviyorum";
-const GATE_ANSWER = "Zehra";
-const GATE_QUESTION = "Yusuf'un en sevdiği yer neresidir?";
+// Türkiye saatiyle 23 Ekim 2026, 10:00
+const MEETING_AT = new Date("2026-10-23T10:00:00+03:00");
 const DEFAULT_MUSIC = { videoId: "T1bDNsX6_lA", endSec: 64 };
 const START_LETTER_ID = "2026-08-25"; // Geç Mektup — varsayılan başlangıç
-const NEW_BADGE_LETTER_ID = "2026-10-11"; // yalnızca bu mektupta "Yeni" rozeti
+const NEW_BADGE_LETTER_ID = "2026-10-18"; // yalnızca bu mektupta "Yeni" rozeti
 const LETTER_REVEAL_MS = 1250;
 const PETAL_CLEANUP_MS = 11000;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-function getCookie(name) {
-  const encoded = `${encodeURIComponent(name)}=`;
-  const parts = document.cookie.split(";");
-  for (const part of parts) {
-    const trimmed = part.trim();
-    if (trimmed.startsWith(encoded)) {
-      return decodeURIComponent(trimmed.slice(encoded.length));
-    }
-  }
-  return "";
-}
-
-function setCookie(name, value, days = 30) {
-  const maxAge = days * 24 * 60 * 60;
-  document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; path=/; max-age=${maxAge}; SameSite=Lax`;
-}
-
-function deleteCookie(name) {
-  document.cookie = `${encodeURIComponent(name)}=; path=/; max-age=0; SameSite=Lax`;
-}
-
-function getFailCount() {
-  const raw = Number(getCookie(GATE_FAIL_COOKIE));
-  return Number.isFinite(raw) && raw > 0 ? Math.floor(raw) : 0;
-}
-
-function setFailCount(count) {
-  setCookie(GATE_FAIL_COOKIE, String(count));
-}
-
-function clearFailCount() {
-  deleteCookie(GATE_FAIL_COOKIE);
-}
-
-function normalizePhrase(value) {
-  return String(value || "")
-    .trim()
-    .replace(/\s+/g, " ")
-    .toLocaleLowerCase("tr-TR");
-}
-
-function isPhraseUnlock(value) {
-  return normalizePhrase(value) === normalizePhrase(GATE_UNLOCK_PHRASE);
-}
-
-function isGateAnswer(value) {
-  return normalizePhrase(value) === normalizePhrase(GATE_ANSWER);
-}
-
-function isGateUnlocked() {
-  try {
-    return sessionStorage.getItem(GATE_KEY) === "1";
-  } catch (_) {
-    return false;
-  }
-}
-
-function unlockSite() {
-  try {
-    sessionStorage.setItem(GATE_KEY, "1");
-  } catch (_) {
-    /* ignore */
-  }
-
-  clearFailCount();
-  document.body.classList.remove("is-locked", "gate-locked-hard");
-  if (archiveMenu) archiveMenu.hidden = false;
-  if (stage) stage.hidden = false;
-
-  if (gate) {
-    window.setTimeout(() => {
-      gate.setAttribute("aria-hidden", "true");
-      gate.hidden = true;
-    }, prefersReducedMotion ? 0 : 560);
-  }
-
-  window.setTimeout(() => {
-    gateAnswer?.blur();
-  }, 0);
-}
-
-function lockSite() {
-  document.body.classList.add("is-locked");
-  if (archiveMenu) archiveMenu.hidden = true;
-  if (stage) stage.hidden = true;
-  if (gate) {
-    gate.hidden = false;
-    gate.setAttribute("aria-hidden", "false");
-  }
-}
-
-function showGateError(message) {
-  if (!gateError) return;
-  gateError.hidden = false;
-  gateError.textContent = message;
-}
-
-function shakeGateInput() {
-  if (!gateAnswer) return;
-  gateAnswer.classList.remove("is-shake");
-  void gateAnswer.offsetWidth;
-  gateAnswer.classList.add("is-shake");
-}
-
-function setGateMode(mode) {
-  const hardLock = mode === "phrase";
-  document.body.classList.toggle("gate-locked-hard", hardLock);
-
-  if (gateEyebrow) {
-    gateEyebrow.textContent = hardLock ? "Son şans" : "Sadece bizim bildiğimiz";
-  }
-  if (gateTitle) {
-    gateTitle.textContent = hardLock ? "Kilitlendin" : "Bir soru";
-  }
-  if (gateQuestion) {
-    gateQuestion.textContent = hardLock
-      ? "Siteyi açmak için şunu yaz: Yusuf seni çok seviyorum"
-      : GATE_QUESTION;
-  }
-
-  if (gateAnswer) {
-    gateAnswer.value = "";
-    gateAnswer.removeAttribute("inputmode");
-    gateAnswer.removeAttribute("pattern");
-    gateAnswer.type = "text";
-    if (hardLock) {
-      gateAnswer.setAttribute("maxlength", "64");
-      gateAnswer.placeholder = "Yaz…";
-    } else {
-      gateAnswer.setAttribute("maxlength", "32");
-      gateAnswer.placeholder = "?";
-    }
-  }
-
-  if (gateError) {
-    gateError.hidden = true;
-  }
-}
-
-function initGate() {
-  if (isGateUnlocked()) {
-    document.body.classList.remove("is-locked", "gate-locked-hard");
-    if (archiveMenu) archiveMenu.hidden = false;
-    if (stage) stage.hidden = false;
-    if (gate) {
-      gate.hidden = true;
-      gate.setAttribute("aria-hidden", "true");
-    }
-    return;
-  }
-
-  lockSite();
-  setGateMode(getFailCount() >= GATE_FAIL_LIMIT ? "phrase" : "question");
-  window.setTimeout(() => gateAnswer?.focus(), 80);
-}
-
-gateForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const raw = String(gateAnswer?.value || "").trim();
-  const hardLock = getFailCount() >= GATE_FAIL_LIMIT;
-
-  if (hardLock) {
-    if (isPhraseUnlock(raw)) {
-      unlockSite();
-      return;
-    }
-
-    showGateError("Tam olarak yazmalısın: Yusuf seni çok seviyorum");
-    if (gateAnswer) {
-      gateAnswer.value = "";
-      gateAnswer.focus();
-    }
-    shakeGateInput();
-    return;
-  }
-
-  if (isGateAnswer(raw)) {
-    unlockSite();
-    return;
-  }
-
-  const fails = getFailCount() + 1;
-  setFailCount(fails);
-
-  if (fails >= GATE_FAIL_LIMIT) {
-    setGateMode("phrase");
-    showGateError("3 yanlış cevap. Artık sadece özel cümle ile açabilirsin.");
-    window.setTimeout(() => gateAnswer?.focus(), 40);
-    return;
-  }
-
-  showGateError(`Yanlış cevap. Kalan deneme: ${GATE_FAIL_LIMIT - fails}`);
-  if (gateAnswer) {
-    gateAnswer.value = "";
-    gateAnswer.focus();
-  }
-  shakeGateInput();
-});
-
-initGate();
-
 const SEED_LETTERS = [
+  {
+    id: "2026-10-18",
+    title: "Güzel Kelebeğim",
+    date: "18 Ekim 2026",
+    dateTime: "2026-10-18",
+    music: {
+      url: "https://www.youtube.com/watch?v=A33z9eomcr0",
+      videoId: "A33z9eomcr0",
+      endSec: 237, // 3:57
+    },
+    greeting: "Canımın içi, benim güzel sevdiceğim…",
+    body: [
+      "Hayatım, bazen bir insanı ne kadar çok sevdiğini bilmekle ona bu sevgiyi gerektiği gibi hissettirebilmek arasında bir fark oluyor. Ben seni ne kadar sevdiğimi, benim için ne kadar kıymetli olduğunu biliyorum. Ama biliyorum ki senin de bunu yalnızca benim içimde var olan bir duygu olarak değil, hayatının içinde her zaman hissedebildiğin bir şey olarak yaşaman gerekiyor.",
+      "Dün yaşadıklarını düşündükçe aklım sende kalıyor birtanem. Gözündeki ağrının sol koluna kadar vurduğunu biliyorum. O an yanında olup seninle ilgilenmem, nasıl olduğunu takip etmem, kendini yalnız hissetmemen için elimden geleni yapmam gerekirdi. Bazen insanın en çok ihtiyaç duyduğu şey büyük sözler ya da çözümler değil, sevdiği insanın yanında olduğunu bilmek oluyor. Ben senin böyle zamanlarında kendini yalnız hissetmeni istemiyorum hayatım. Çünkü senin canının yanması da üzülmen de benim için önemli. Senin iyi olman, kendini güvende ve değerli hissetmen benim için sıradan şeyler değil.",
+      "Birtanem, sana olan sevgim yalnızca güzel günlerde, keyfimiz yerindeyken ya da birbirimize güzel sözler söylerken var olan bir şey değil. Ben seni hayatımın her hâlinde istiyorum. İyi olduğun günlerde sevincini paylaşmak, zorlandığın günlerde yükünü hafifletmek, kendini kötü hissettiğinde yanında olduğunu sana hissettirmek istiyorum. Senin hayatında yalnızca seni güldüren biri değil, ihtiyaç duyduğunda güvenle yaslanabileceğin insan da olmak istiyorum.",
+      "Aramızda bazı şeylerin eskisi kadar kolay hissettirmediğinin, bazı duyguların ve güvenin zaman zaman incinebildiğinin farkındayım. Bunu birkaç güzel cümleyle geçiştirmek ya da sana her şeyin hemen düzeleceğini söylemek istemiyorum. Çünkü senin bana duyduğun güven benim için çok kıymetli. Eğer bu güvenin bir kısmını eksilttiysem onu yeniden kazanmanın benim sorumluluğum olduğunu biliyorum. Belki bunun için zamana ihtiyacımız olacak, belki aynı şeyi defalarca davranışlarımla göstermem gerekecek. Ben bundan kaçmak istemiyorum. Sana verdiğim değeri yalnızca anlatmak değil, sana yaşatmak istiyorum. Bir gün geriye dönüp baktığında, kırılan yerlerin gerçekten onarıldığını ve sevgimin sözde kalmadığını hissetmeni istiyorum.",
+      "Seni çok seviyorum benim güzel kelebeğim. Bunu yalnızca şu an aramız limoni olduğu için söylemiyorum. Sen benim hayatımda olduğun için, seni tanıdığım için, seninle bir gelecek hayal edebildiğim için seviyorum. Senin gülüşünü, sesini, bana kendini anlatışını, bazen küçücük bir şeyle bile günümü güzelleştirişini. Seni sen yapan şeyleri seviyorum. Ve bütün bunların yanında, sana karşı daha dikkatli olmayı, seni daha iyi anlamayı ve sevgimi sana daha doğru hissettirmeyi de istiyorum.",
+      "Ben senin kalbinde güzel bir yerim olsun istiyorum hayatım. Sadece beni sevdiğin için değil, bana güvendiğin, ihtiyaç duyduğunda yanında bulduğun ve kendini benimle huzurlu hissettiğin için de. Bunun bir anda olmayacağını biliyorum ama sana bunu hissettirmekten vazgeçmeyeceğim.",
+      "İyi ki hayatımdasın canımın içi. Senin benim için ne kadar kıymetli olduğunu bazen kelimelerle anlatmak yetmiyor. Umarım bundan sonra bunu sana daha çok davranışlarımla gösterebilirim. Çünkü sen benim için yalnızca çok sevdiğim kadın değil, sevgisine özen göstermek ve kalbini incitmemek için daha iyisini öğrenmek istediğim insansın.",
+    ],
+    closing: "Seni çok seviyorum birtanem. Hem bugün hem de birlikte yaşayacağımız bütün yarınlarda 🩵",
+    signature: "Yusuf",
+  },
   {
     id: "2026-10-11",
     title: "Yanındayım",
@@ -1181,5 +996,97 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+const AMBIENT_HEART_PALETTE = [
+  ["#e3f0fc", "#8fb8e4", "#4a7cbc"],
+  ["#d7e8fb", "#7eafdf", "#3f74b5"],
+  ["#cfe3f8", "#74a6d8", "#3a6aa8"],
+  ["#c9d9f5", "#7f9fd6", "#4b6eae"],
+  ["#eaf4ff", "#a6c8ec", "#5d8fcc"],
+];
+const AMBIENT_HEART_MAX = 16;
+
+let countdownTimer = null;
+let ambientHeartTimer = null;
+
+function pad2(value) {
+  return String(value).padStart(2, "0");
+}
+
+function updateCountdown() {
+  if (!countdownGrid) return;
+
+  const diff = MEETING_AT.getTime() - Date.now();
+
+  if (diff <= 0) {
+    countdownGrid.hidden = true;
+    if (countdownDone) countdownDone.hidden = false;
+    window.clearInterval(countdownTimer);
+    countdownTimer = null;
+    return;
+  }
+
+  const totalSeconds = Math.floor(diff / 1000);
+  const values = {
+    days: String(Math.floor(totalSeconds / 86400)),
+    hours: pad2(Math.floor((totalSeconds % 86400) / 3600)),
+    minutes: pad2(Math.floor((totalSeconds % 3600) / 60)),
+    seconds: pad2(totalSeconds % 60),
+  };
+
+  for (const [unit, value] of Object.entries(values)) {
+    const el = countdownGrid.querySelector(`[data-unit="${unit}"]`);
+    if (el && el.textContent !== value) el.textContent = value;
+  }
+}
+
+function spawnAmbientHeart() {
+  if (!ambientHearts || document.hidden) return;
+  if (ambientHearts.childElementCount >= AMBIENT_HEART_MAX) return;
+
+  const mobile = window.matchMedia("(max-width: 640px)").matches;
+  const heart = document.createElement("span");
+  heart.className = "ambient-heart";
+  heart.innerHTML = createHeartSvg(pick(AMBIENT_HEART_PALETTE));
+  heart.style.setProperty("--x", `${rand(2, 98)}%`);
+  heart.style.setProperty("--size", `${rand(mobile ? 14 : 16, mobile ? 30 : 38)}px`);
+  heart.style.setProperty("--duration", `${rand(10, 17)}s`);
+  heart.style.setProperty("--sway", `${rand(-40, 40)}px`);
+  heart.style.setProperty("--rot", `${rand(-18, 18)}deg`);
+  heart.style.setProperty("--alpha", `${rand(0.45, 0.85)}`);
+  heart.addEventListener("animationend", () => heart.remove(), { once: true });
+  ambientHearts.appendChild(heart);
+}
+
+function startAmbientHearts() {
+  if (!ambientHearts || prefersReducedMotion || ambientHeartTimer) return;
+
+  for (let i = 0; i < 4; i += 1) {
+    window.setTimeout(spawnAmbientHeart, i * 600);
+  }
+
+  const mobile = window.matchMedia("(max-width: 640px)").matches;
+  ambientHeartTimer = window.setInterval(spawnAmbientHeart, mobile ? 1300 : 950);
+}
+
+function goToLetters() {
+  document.body.classList.remove("is-landing");
+  if (archiveMenu) archiveMenu.hidden = false;
+  if (stage) stage.hidden = false;
+
+  if (landing) {
+    landing.setAttribute("aria-hidden", "true");
+    window.setTimeout(() => {
+      landing.hidden = true;
+    }, prefersReducedMotion ? 0 : 600);
+  }
+
+  window.setTimeout(() => envelopeBtn?.focus({ preventScroll: true }), 50);
+}
+
+goLettersBtn?.addEventListener("click", goToLetters);
+
 loadLetters();
 renderActiveLetter();
+updateCountdown();
+countdownTimer = window.setInterval(updateCountdown, 1000);
+startAmbientHearts();

@@ -9,37 +9,44 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="is-locked">
+<body class="is-landing">
   <div class="atmosphere" aria-hidden="true">
     <div class="glow glow-a"></div>
     <div class="glow glow-b"></div>
     <div class="grain"></div>
   </div>
 
-  <section class="gate" id="gate" aria-labelledby="gateTitle">
-    <form class="gate-card" id="gateForm" autocomplete="off">
-      <p class="gate-eyebrow" id="gateEyebrow">Sadece bizim bildiğimiz</p>
-      <h1 class="gate-title" id="gateTitle">Bir soru</h1>
-      <p class="gate-question" id="gateQuestion">
-        Yusuf'un en sevdiği yer neresidir?
-      </p>
-      <label class="gate-label" for="gateAnswer">Cevabın</label>
-      <input
-        class="gate-input"
-        id="gateAnswer"
-        name="answer"
-        type="text"
-        maxlength="32"
-        placeholder="?"
-        required
-        autofocus
-        enterkeyhint="go"
-        autocomplete="off"
-        autocapitalize="words"
-      />
-      <p class="gate-error" id="gateError" role="alert" hidden>Yanlış cevap, bir daha dene.</p>
-      <button class="gate-submit" type="submit">Aç</button>
-    </form>
+  <div class="ambient-hearts" id="ambientHearts" aria-hidden="true"></div>
+
+  <section class="landing" id="landing" aria-labelledby="landingTitle">
+    <div class="countdown" role="timer" aria-label="Buluşmaya kalan zaman">
+      <p class="countdown-label">Buluşmaya kalan zaman</p>
+      <div class="countdown-grid" id="countdownGrid">
+        <div class="countdown-unit">
+          <span class="countdown-value" data-unit="days">0</span>
+          <span class="countdown-name">Gün</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-value" data-unit="hours">00</span>
+          <span class="countdown-name">Saat</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-value" data-unit="minutes">00</span>
+          <span class="countdown-name">Dakika</span>
+        </div>
+        <div class="countdown-unit">
+          <span class="countdown-value" data-unit="seconds">00</span>
+          <span class="countdown-name">Saniye</span>
+        </div>
+      </div>
+      <p class="countdown-done" id="countdownDone" hidden>Buluşma zamanı geldi 🩵</p>
+    </div>
+
+    <div class="landing-card">
+      <p class="landing-eyebrow">Zehra'ya</p>
+      <h1 class="landing-title" id="landingTitle">Mektuplarım</h1>
+      <button class="landing-btn" id="goLettersBtn" type="button">Mektuplara git</button>
+    </div>
   </section>
 
   <nav class="archive-menu" aria-label="Mektup arşivi" hidden>

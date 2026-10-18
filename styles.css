@@ -44,27 +44,95 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-.gate {
+.landing {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: 40;
   display: grid;
-  place-items: center;
-  padding: max(1.25rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right)) max(1.25rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
-  background:
-    radial-gradient(ellipse at 50% 20%, rgba(247, 241, 230, 0.55), transparent 55%),
-    rgba(180, 188, 190, 0.28);
-  backdrop-filter: blur(10px);
-  transition: opacity 0.55s var(--ease-out), visibility 0.55s ease;
+  grid-template-rows: auto 1fr;
+  justify-items: center;
+  padding:
+    max(1.25rem, env(safe-area-inset-top))
+    max(1rem, env(safe-area-inset-right))
+    max(1.25rem, env(safe-area-inset-bottom))
+    max(1rem, env(safe-area-inset-left));
+  transition: opacity 0.6s var(--ease-out), visibility 0.6s ease;
 }
 
-body:not(.is-locked) .gate {
+body:not(.is-landing) .landing {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
-.gate-card {
+body.is-landing .archive-menu,
+body.is-landing .stage {
+  visibility: hidden;
+}
+
+.countdown {
+  width: min(100%, 520px);
+  text-align: center;
+  padding-top: clamp(0.5rem, 3vh, 1.75rem);
+}
+
+.countdown-label {
+  font-size: clamp(0.7rem, 2.6vw, 0.82rem);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hint);
+  margin-bottom: 0.85rem;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.4rem, 2vw, 0.75rem);
+}
+
+.countdown-grid[hidden] {
+  display: none;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: clamp(0.65rem, 2.6vw, 0.95rem) 0.25rem;
+  border-radius: 14px;
+  background: rgba(247, 241, 230, 0.72);
+  border: 1px solid rgba(74, 124, 188, 0.18);
+  box-shadow: 0 10px 24px rgba(50, 60, 90, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.countdown-value {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.75rem, 8vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1;
+  color: #355f9c;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-name {
+  font-size: clamp(0.6rem, 2.2vw, 0.72rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.countdown-done {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.5rem, 6vw, 2.1rem);
+  font-weight: 600;
+  color: #355f9c;
+}
+
+.landing-card {
+  align-self: center;
   width: min(100%, 360px);
   padding: clamp(1.6rem, 5vw, 2.25rem) clamp(1.35rem, 4.5vw, 2rem);
   border-radius: 18px;
@@ -76,7 +144,7 @@ body:not(.is-locked) .gate {
   text-align: center;
 }
 
-.gate-eyebrow {
+.landing-eyebrow {
   font-size: 0.68rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -84,64 +152,17 @@ body:not(.is-locked) .gate {
   margin-bottom: 0.7rem;
 }
 
-.gate-title {
+.landing-title {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(2rem, 8vw, 2.55rem);
   font-weight: 600;
   line-height: 1.1;
-  margin-bottom: 0.85rem;
-}
-
-.gate-question {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(1.15rem, 4.2vw, 1.35rem);
-  line-height: 1.45;
-  color: var(--ink);
   margin-bottom: 1.35rem;
 }
 
-.gate-label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
-.gate-input {
-  width: 100%;
-  appearance: none;
-  border: 1px solid rgba(42, 36, 56, 0.18);
-  background: rgba(255, 255, 255, 0.45);
-  border-radius: 12px;
-  padding: 0.95rem 1rem;
-  font-family: "Outfit", sans-serif;
-  font-size: 1.35rem;
-  letter-spacing: 0.12em;
-  text-align: center;
-  color: var(--ink);
-  outline: none;
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-
-.gate-input:focus {
-  border-color: rgba(122, 59, 59, 0.45);
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.gate-error {
-  margin-top: 0.7rem;
-  font-size: 0.85rem;
-  color: var(--wax);
-}
-
-.gate-submit {
+.landing-btn {
   appearance: none;
   width: 100%;
-  margin-top: 1rem;
   border: 0;
   border-radius: 999px;
   padding: 0.95rem 1.2rem;
@@ -156,47 +177,61 @@ body:not(.is-locked) .gate {
   transition: transform 0.2s var(--ease-out), filter 0.2s ease;
 }
 
-.gate-submit:hover,
-.gate-submit:focus-visible {
+.landing-btn:hover,
+.landing-btn:focus-visible {
   filter: brightness(1.05);
   outline: none;
 }
 
-.gate-submit:active {
+.landing-btn:active {
   transform: scale(0.98);
 }
 
-.gate-input.is-shake {
-  animation: gateShake 0.42s var(--ease-out);
+.ambient-hearts {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-@keyframes gateShake {
-  0%,
-  100% {
-    transform: translateX(0);
+.ambient-heart {
+  position: absolute;
+  bottom: -48px;
+  left: var(--x, 50%);
+  width: var(--size, 24px);
+  height: var(--size, 24px);
+  margin-left: calc(var(--size, 24px) / -2);
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: heartRise var(--duration, 13s) linear forwards;
+  filter: drop-shadow(0 3px 5px rgba(40, 70, 120, 0.18));
+}
+
+.ambient-heart svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes heartRise {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)) scale(0.8);
   }
-  25% {
-    transform: translateX(-6px);
+  10% {
+    opacity: var(--alpha, 0.7);
   }
   50% {
-    transform: translateX(6px);
+    transform: translate3d(var(--sway, 0px), -55vh, 0) rotate(calc(var(--rot, 0deg) * -1)) scale(1);
   }
-  75% {
-    transform: translateX(-4px);
+  85% {
+    opacity: var(--alpha, 0.7);
   }
-}
-
-body.gate-locked-hard .gate-card {
-  box-shadow: 0 22px 48px rgba(122, 59, 59, 0.22);
-}
-
-body.gate-locked-hard .gate-title {
-  color: var(--wax);
-}
-
-body.is-locked .archive-menu,
-body.is-locked .stage {
-  visibility: hidden;
+  100% {
+    opacity: 0;
+    transform: translate3d(calc(var(--sway, 0px) * -0.5), -115vh, 0) rotate(var(--rot, 0deg)) scale(1.05);
+  }
 }
 
 .atmosphere {
@@ -795,7 +830,8 @@ body.archive-open .archive-panel {
     pointer-events: auto;
   }
 
-  .petal-field {
+  .petal-field,
+  .ambient-hearts {
     display: none;
   }
 }
