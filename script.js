@@ -19,12 +19,41 @@ const STORAGE_KEY = "zehra-letters-v1";
 const MEETING_AT = new Date("2026-10-23T10:00:00+03:00");
 const DEFAULT_MUSIC = { videoId: "T1bDNsX6_lA", endSec: 64 };
 const START_LETTER_ID = "2026-08-25"; // Geç Mektup — varsayılan başlangıç
-const NEW_BADGE_LETTER_ID = "2026-10-18"; // yalnızca bu mektupta "Yeni" rozeti
+const NEW_BADGE_LETTER_ID = "2026-10-23"; // yalnızca bu mektupta "Yeni" rozeti
 const LETTER_REVEAL_MS = 1250;
 const PETAL_CLEANUP_MS = 11000;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const SEED_LETTERS = [
+  {
+    id: "2026-10-23",
+    title: "Kavuşma",
+    date: "23 Ekim 2026",
+    dateTime: "2026-10-23",
+    // Bu saatten önce menüde görünmez (Türkiye saati)
+    availableFrom: "2026-10-23T09:30:00+03:00",
+    music: {
+      url: "https://www.youtube.com/watch?v=yaWe_qnyYvA",
+      videoId: "yaWe_qnyYvA",
+      endSec: 288, // 4:48
+    },
+    greeting: "Benim güzel Zehram,",
+    body: [
+      "Birtanem, şu an sana bunları yazarken yarın yanında olacağımı düşünüyorum. Günlerdir içimde biriken özlemin sonunda sana sarılabileceğim. Sesini telefondan duymak yerine yanı başımda duyacağım, yüzünü ekrandan görmek yerine karşımda göreceğim. Belki sana kavuştuğumda anlatmak istediğim onca şeyi unutacağım. Belki de sana öyle bir sarılacağım ki günlerdir içimde tuttuğum ne varsa o sarılmanın içine sığacak.",
+      "Zehram, ben seni gerçekten çok seviyorum. Bazen bunu sana nasıl anlatacağımı bilmiyorum. Sana seni çok sevdiğimi söylüyorum ama içimdeki şeyin yalnızca bu üç kelimeden ibaret olmadığını biliyorum. Keşke bir anlığına kalbimin içini sana gösterebilsem. Benim seni düşünürken nasıl gülümsediğimi, senden bahsederken içimin nasıl kıpır kıpır olduğunu, seninle geçireceğim küçücük bir zamanın bile benim için nasıl bir anlam taşıdığını görebilsen. Belki o zaman sana neden doyamadığımı, neden her görüşmemizden sonra yeniden özlediğimi anlardın.",
+      "İnsan birini bu kadar severken onunla ilgili ne çok şey hayal ediyormuş, biliyor musun? Bazen öyle büyük şeyler bile değil. Seninle yan yana oturmak, sana bir şey anlatırken yüzüne bakmak, durduk yere gülüşüne şahit olmak, bir gün hiçbir yere yetişme telaşımız olmadan birlikte vakit geçirmek. Bunları düşündüğümde bile mutlu oluyorum. Çünkü hayalimdeki güzel şeylerin içinde sen varsın. Bir yere gitmekten, bir şey yapmaktan daha çok, bunları seninle yaşıyor olmak heyecanlandırıyor beni. Benim için mesele yalnızca güzel günler geçirmek değil; o günlerin içinde seninle birlikte olmak.",
+      "Bir de seni özlemenin garip bir tarafı var birtanem. İnsan uzaktayken kavuşacağı anı düşünüyor ya, ben bazen o anı bile özlüyorum. Sana doğru geldiğim yolu, seni ilk gördüğüm anı, yüzündeki ifadeyi, birbirimize kavuştuğumuzda yaşayacağımız o birkaç saniyeyi… Yarın bunların hepsi gerçekten yaşanacak ve ben şu an bile o anı düşününce heyecanlanıyorum. Belki sana bunları okuduktan sonra neden böyle baktığımı sorarsın. Belki de hiçbir şey sormazsın. Ama ben sana bakarken içimden geçenleri keşke bilebilsen.",
+      "Seninle tanışmış olmamın, seni seviyor olmamın benim için ne kadar büyük bir şey olduğunu bazen kendime bile anlatamıyorum. Hayatımda ilk defa bir insana duyduğum özlemi günler sayarak, kavuşacağımız anı düşünerek, söyleyeceğim sözleri kafamda kurarak yaşıyorum. Ve bütün bunların içinde en güzeli şu: Ben yalnızca sana kavuşmayı beklemiyorum; seninle daha yaşayacağımız onca şeyin hayalini de kuruyorum. Daha birlikte güleceğimiz, birbirimize anlatacağımız, yıllar sonra hatırlayıp yine gülümseyeceğimiz ne çok anımız olsun istiyorum.",
+      "Birtanem , yarın sana geldiğimde belki bu mektuptaki hiçbir cümleyi hatırlamayacağım. Çünkü karşımda sen olacaksın. Ben de büyük ihtimalle seni seyretmekle sesini dinlemekle meşgul olacağım. Ama sen şunu bil istiyorum: Ben buraya yalnızca seni özlediğim için gelmiyorum. Ben seni sevdiğim için, seninle geçirdiğim zamanı hayatımın en kıymetli anlarından biri olarak gördüğüm için, seninle yaşadığım şeyin benim için ne kadar gerçek ve güzel olduğunu her geçen gün biraz daha anladığım için geliyorum.",
+      "Sana kavuşacağım için çok mutluyum canımın içi. Şu an tek istediğim şey yarının gelmesi ve sonunda seni görebilmek. Belki o an sana yalnızca “Çok özledim seni” diyeceğim. Ama o cümlenin içinde kaç gündür seni düşündüğümü, seni ne kadar çok sevdiğimi ve şu an yanında olabilmek için ne kadar heyecanlandığımı sen bil istiyorum.",
+      "Yarın geliyorum birtanem. Bu kez seni uzaktan özlemek yerine, sana sarılıp biraz da öyle seveyim.",
+    ],
+    closing: [
+      "Seni çok seviyorum benim güzel Zehram. Hem de sana bazen anlatabildiğimden çok daha fazla.",
+      "Not: Bu mektup ben İzmire indiğimde yayına geçecek.",
+    ],
+    signature: "Yusuf",
+  },
   {
     id: "2026-10-18",
     title: "Güzel Kelebeğim",
@@ -578,15 +607,40 @@ function saveLetters() {
   }
 }
 
+function isLetterAvailable(item) {
+  if (!item?.availableFrom) return true;
+  return Date.now() >= Date.parse(item.availableFrom);
+}
+
+function getVisibleLetters() {
+  return letters.filter(isLetterAvailable);
+}
+
 function getActiveLetter() {
+  const visible = getVisibleLetters();
   return (
-    letters.find((item) => item.id === activeLetterId) ||
-    letters.find((item) => item.id === START_LETTER_ID) ||
-    letters[0] ||
+    visible.find((item) => item.id === activeLetterId) ||
+    visible.find((item) => item.id === START_LETTER_ID) ||
+    visible[0] ||
     SEED_LETTERS.find((item) => item.id === START_LETTER_ID) ||
     SEED_LETTERS[0]
   );
 }
+
+function scheduleLetterUnlocks() {
+  for (const item of letters) {
+    if (!item.availableFrom) continue;
+    const delay = Date.parse(item.availableFrom) - Date.now();
+    if (delay > 0 && delay < 2 ** 31 - 1) {
+      window.setTimeout(renderArchiveList, delay + 500);
+    }
+  }
+}
+
+// Uyku/arka plandan dönen cihazlarda zamanlayıcı kaçabilir
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) renderArchiveList();
+});
 
 function isNewArchiveLetter(item) {
   return item.id === NEW_BADGE_LETTER_ID;
@@ -673,7 +727,7 @@ function renderActiveLetter() {
 function renderArchiveList() {
   if (!archiveList) return;
 
-  archiveList.innerHTML = letters
+  archiveList.innerHTML = getVisibleLetters()
     .map((item) => {
       const isActive = item.id === activeLetterId;
       const isNew = isNewArchiveLetter(item);
@@ -705,7 +759,7 @@ function setArchiveOpen(open) {
 }
 
 function selectLetter(id) {
-  if (!letters.some((item) => item.id === id)) return;
+  if (!getVisibleLetters().some((item) => item.id === id)) return;
 
   const changed = id !== activeLetterId;
   activeLetterId = id;
@@ -1087,6 +1141,7 @@ goLettersBtn?.addEventListener("click", goToLetters);
 
 loadLetters();
 renderActiveLetter();
+scheduleLetterUnlocks();
 updateCountdown();
 countdownTimer = window.setInterval(updateCountdown, 1000);
 startAmbientHearts();
