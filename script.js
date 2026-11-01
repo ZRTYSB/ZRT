@@ -1122,22 +1122,324 @@ function startAmbientHearts() {
   ambientHeartTimer = window.setInterval(spawnAmbientHeart, mobile ? 1300 : 950);
 }
 
+let landingHideTimer = null;
+
+function hideLanding() {
+  if (!landing) return;
+  landing.setAttribute("aria-hidden", "true");
+  window.clearTimeout(landingHideTimer);
+  landingHideTimer = window.setTimeout(() => {
+    landing.hidden = true;
+  }, prefersReducedMotion ? 0 : 600);
+}
+
+function closeLetterNow() {
+  setArchiveOpen(false);
+  if (!isOpen) return;
+  isAnimating = false;
+  setOpen(false);
+}
+
 function goToLetters() {
-  document.body.classList.remove("is-landing");
+  document.body.classList.remove("is-landing", "is-game");
+  if (game) game.hidden = true;
   if (archiveMenu) archiveMenu.hidden = false;
   if (stage) stage.hidden = false;
-
-  if (landing) {
-    landing.setAttribute("aria-hidden", "true");
-    window.setTimeout(() => {
-      landing.hidden = true;
-    }, prefersReducedMotion ? 0 : 600);
-  }
+  hideLanding();
 
   window.setTimeout(() => envelopeBtn?.focus({ preventScroll: true }), 50);
 }
 
+function goToLanding() {
+  closeLetterNow();
+  window.clearTimeout(landingHideTimer);
+  document.body.classList.remove("is-game");
+  document.body.classList.add("is-landing");
+  if (game) game.hidden = true;
+  if (archiveMenu) archiveMenu.hidden = true;
+  if (stage) stage.hidden = true;
+  if (landing) {
+    landing.hidden = false;
+    landing.removeAttribute("aria-hidden");
+  }
+}
+
+function goToGame() {
+  closeLetterNow();
+  document.body.classList.remove("is-landing");
+  document.body.classList.add("is-game");
+  if (archiveMenu) archiveMenu.hidden = true;
+  if (stage) stage.hidden = true;
+  if (game) game.hidden = false;
+  hideLanding();
+  showGameIntro();
+}
+
+// ---------- Oyun ----------
+
+const game = document.getElementById("game");
+const gameCard = document.getElementById("gameCard");
+const GAME_DATA_URL = "oyun.json";
+const GAME_BEST_KEY = "zehra-game-best-v1";
+
+let gameData = null;
+let gameState = null;
+
+function shuffle(list) {
+  const copy = [...list];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function normalizeQuestion(raw, index) {
+  const options = Array.isArray(raw?.options) ? raw.options.map(String) : [];
+  const answer = String(raw?.answer ?? "");
+  if (!raw?.question || options.length < 2 || !options.includes(answer)) {
+    console.warn(`oyun.json: ${index + 1}. soru atlandı (soru metni, en az 2 seçenek ve seçeneklerden biriyle birebir aynı "answer" gerekli).`, raw);
+    return null;
+  }
+  return {
+    question: String(raw.question),
+    options,
+    answer,
+    points: Math.max(0, Number(raw.points) || 0),
+    note: raw.note ? String(raw.note) : "",
+    wrongNotes: raw.wrongNotes && typeof raw.wrongNotes === "object" ? raw.wrongNotes : {},
+  };
+}
+
+async function loadGameData() {
+  if (gameData) return gameData;
+
+  const response = await fetch(GAME_DATA_URL, { cache: "no-cache" });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  const raw = await response.json();
+
+  const questions = (Array.isArray(raw.questions) ? raw.questions : [])
+    .map(normalizeQuestion)
+    .filter(Boolean);
+  if (!questions.length) throw new Error("Geçerli soru bulunamadı");
+
+  const results = (Array.isArray(raw.results) ? raw.results : [])
+    .map((item) => ({ ...item, minPercent: Number(item.minPercent) || 0 }))
+    .sort((a, b) => b.minPercent - a.minPercent);
+
+  gameData = {
+    title: raw.title || "Oyun",
+    description: raw.description || "",
+    shuffleOptions: raw.shuffleOptions !== false,
+    shuffleQuestions: Boolean(raw.shuffleQuestions),
+    questions,
+    results,
+    maxScore: questions.reduce((sum, item) => sum + item.points, 0),
+  };
+  return gameData;
+}
+
+function getBestScore() {
+  const value = Number(localStorage.getItem(GAME_BEST_KEY));
+  return Number.isFinite(value) && value > 0 ? value : 0;
+}
+
+function saveBestScore(score) {
+  try {
+    localStorage.setItem(GAME_BEST_KEY, String(score));
+  } catch (_) {
+    /* private mode / quota */
+  }
+}
+
+async function showGameIntro() {
+  if (!gameCard) return;
+  gameCard.innerHTML = '<p class="game-status">Sorular yükleniyor…</p>';
+
+  let data;
+  try {
+    data = await loadGameData();
+  } catch (error) {
+    console.error(error);
+    gameCard.innerHTML = `
+      <p class="landing-eyebrow">Oyun</p>
+      <h2 class="game-title">Sorular yüklenemedi</h2>
+      <p class="game-text">
+        <code>oyun.json</code> dosyası okunamadı. Sayfa doğrudan dosyadan (file://) açıldıysa
+        tarayıcı JSON okumayı engeller; siteyi bir sunucu üzerinden açmayı dene.
+      </p>
+      <button class="landing-btn" type="button" data-game-action="retry">Tekrar dene</button>
+    `;
+    return;
+  }
+
+  const best = getBestScore();
+  gameCard.innerHTML = `
+    <p class="landing-eyebrow">Oyun</p>
+    <h2 class="game-title">${escapeHtml(data.title)}</h2>
+    ${data.description ? `<p class="game-text">${escapeHtml(data.description)}</p>` : ""}
+    <div class="game-stats">
+      <div class="game-stat">
+        <span class="game-stat-value">${data.questions.length}</span>
+        <span class="game-stat-name">Soru</span>
+      </div>
+      <div class="game-stat">
+        <span class="game-stat-value">${data.maxScore}</span>
+        <span class="game-stat-name">Toplam puan</span>
+      </div>
+      <div class="game-stat">
+        <span class="game-stat-value">${best || "—"}</span>
+        <span class="game-stat-name">En iyi skor</span>
+      </div>
+    </div>
+    <button class="landing-btn" type="button" data-game-action="start">Başla</button>
+  `;
+}
+
+function startGame() {
+  if (!gameData) return;
+  const ordered = gameData.shuffleQuestions ? shuffle(gameData.questions) : gameData.questions;
+
+  gameState = {
+    questions: ordered.map((item) => ({
+      ...item,
+      options: gameData.shuffleOptions ? shuffle(item.options) : item.options,
+    })),
+    index: 0,
+    score: 0,
+    correctCount: 0,
+    answered: false,
+  };
+  renderGameQuestion();
+}
+
+function renderGameQuestion() {
+  if (!gameCard || !gameState) return;
+  const { questions, index, score } = gameState;
+  const current = questions[index];
+  const progress = (index / questions.length) * 100;
+
+  gameCard.innerHTML = `
+    <div class="game-head">
+      <span>Soru ${index + 1} / ${questions.length}</span>
+      <span>Puan: <strong>${score}</strong></span>
+    </div>
+    <div class="game-progress" aria-hidden="true">
+      <span style="width: ${progress}%"></span>
+    </div>
+    <span class="game-points">+${current.points} puan</span>
+    <h2 class="game-question">${escapeHtml(current.question)}</h2>
+    <div class="game-options">
+      ${current.options
+        .map(
+          (option, optionIndex) => `
+            <button class="game-option" type="button" data-option-index="${optionIndex}">
+              ${escapeHtml(option)}
+            </button>
+          `
+        )
+        .join("")}
+    </div>
+    <div class="game-feedback" id="gameFeedback"></div>
+  `;
+  gameState.answered = false;
+}
+
+function answerGameQuestion(optionIndex) {
+  if (!gameState || gameState.answered) return;
+  gameState.answered = true;
+
+  const current = gameState.questions[gameState.index];
+  const chosen = current.options[optionIndex];
+  const isCorrect = chosen === current.answer;
+
+  if (isCorrect) {
+    gameState.score += current.points;
+    gameState.correctCount += 1;
+  }
+
+  gameCard.querySelectorAll(".game-option").forEach((button) => {
+    const option = current.options[Number(button.dataset.optionIndex)];
+    button.disabled = true;
+    if (option === current.answer) button.classList.add("is-correct");
+    else if (option === chosen) button.classList.add("is-wrong");
+  });
+
+  const scoreEl = gameCard.querySelector(".game-head strong");
+  if (scoreEl) scoreEl.textContent = String(gameState.score);
+
+  const wrongNote = isCorrect ? "" : String(current.wrongNotes[chosen] || "");
+  const isLast = gameState.index >= gameState.questions.length - 1;
+  const feedback = gameCard.querySelector("#gameFeedback");
+  if (feedback) {
+    feedback.innerHTML = `
+      <p class="game-verdict ${isCorrect ? "is-correct" : "is-wrong"}">
+        ${isCorrect ? `Doğru! +${current.points} puan` : `Yanlış. Doğru cevap: ${escapeHtml(current.answer)}`}
+      </p>
+      ${wrongNote ? `<p class="game-note">${escapeHtml(wrongNote)}</p>` : ""}
+      ${current.note ? `<p class="game-note">${escapeHtml(current.note)}</p>` : ""}
+      <button class="landing-btn" type="button" data-game-action="next">
+        ${isLast ? "Sonucu gör" : "Sonraki soru"}
+      </button>
+    `;
+    feedback.querySelector("button")?.focus({ preventScroll: true });
+  }
+}
+
+function nextGameQuestion() {
+  if (!gameState) return;
+  if (gameState.index >= gameState.questions.length - 1) {
+    renderGameResult();
+    return;
+  }
+  gameState.index += 1;
+  renderGameQuestion();
+}
+
+function renderGameResult() {
+  if (!gameCard || !gameState || !gameData) return;
+  const { score, correctCount, questions } = gameState;
+  const max = gameData.maxScore;
+  const percent = max > 0 ? Math.round((score / max) * 100) : 0;
+  const result = gameData.results.find((item) => percent >= item.minPercent);
+
+  const previousBest = getBestScore();
+  const isNewBest = score > previousBest;
+  if (isNewBest) saveBestScore(score);
+
+  gameCard.innerHTML = `
+    <p class="landing-eyebrow">Sonuç</p>
+    <p class="game-score">${score}<small> / ${max}</small></p>
+    <p class="game-text">${correctCount} / ${questions.length} doğru · %${percent}</p>
+    ${isNewBest && score > 0 ? '<span class="archive-badge game-best-badge">Yeni rekor</span>' : ""}
+    ${result?.title ? `<h2 class="game-title">${escapeHtml(result.title)}</h2>` : ""}
+    ${result?.message ? `<p class="game-text">${escapeHtml(result.message)}</p>` : ""}
+    <button class="landing-btn" type="button" data-game-action="start">Tekrar oyna</button>
+    <button class="landing-btn landing-btn-alt" type="button" data-game-action="letters">Mektuplara git</button>
+  `;
+
+  if (percent >= 60) spawnPetalRain();
+}
+
+gameCard?.addEventListener("click", (event) => {
+  const option = event.target.closest("[data-option-index]");
+  if (option) {
+    answerGameQuestion(Number(option.dataset.optionIndex));
+    return;
+  }
+
+  const action = event.target.closest("[data-game-action]")?.dataset.gameAction;
+  if (action === "start") startGame();
+  else if (action === "next") nextGameQuestion();
+  else if (action === "retry") showGameIntro();
+  else if (action === "letters") goToLetters();
+});
+
 goLettersBtn?.addEventListener("click", goToLetters);
+document.getElementById("goGameBtn")?.addEventListener("click", goToGame);
+document.getElementById("lettersGameBtn")?.addEventListener("click", goToGame);
+document.getElementById("gameHomeBtn")?.addEventListener("click", goToLanding);
+document.getElementById("gameLettersBtn")?.addEventListener("click", goToLetters);
 
 loadLetters();
 renderActiveLetter();

@@ -1,0 +1,273 @@
+{
+  "title": "Bizi Ne Kadar Tanıyorsun?",
+  "description": "Mektuplardan ve bizden sorular. Her doğru cevap puan kazandırır, zor soruların puanı daha yüksek.",
+  "shuffleOptions": true,
+  "shuffleQuestions": false,
+  "results": [
+    {
+      "minPercent": 90,
+      "title": "Mükemmel!",
+      "message": "Bizi benden bile iyi tanıyorsun. Ödülünü bizzat vereceğim 🩵"
+    },
+    {
+      "minPercent": 60,
+      "title": "Çok iyi!",
+      "message": "Mektupları dikkatle okuduğun belli. Birkaç küçük kaçak var ama affettim."
+    },
+    {
+      "minPercent": 30,
+      "title": "Fena değil",
+      "message": "Mektupları bir kez daha okuman lazım gibi… Ben yine de seni çok seviyorum."
+    },
+    {
+      "minPercent": 0,
+      "title": "Hmm…",
+      "message": "Bu sonucu görmemiş sayıyorum. Hemen mektuplara dön ve tekrar dene 😂"
+    }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "question": "Yusuf evlendikten sonra sıradan bir pazar sabahının nasıl geçmesini ister?",
+      "options": [
+        "Birlikte uzun bir kahvaltı yapıp günü plansız geçirmek",
+        "Erkenden kalkıp bütün işleri bitirmek",
+        "Arkadaşlarla kalabalık bir program yapmak",
+        "Bütün günü ayrı ayrı geçirmek"
+      ],
+      "answer": "Birlikte uzun bir kahvaltı yapıp günü plansız geçirmek",
+      "points": 10
+    },
+    {
+      "id": 2,
+      "question": "Yusuf'a göre evliliğimizde asla kaybetmememiz gereken şey ne olmalı?",
+      "options": [
+        "Birbirimize ilk günkü gibi sevmeye devam etmek",
+        "Her konuda aynı fikirde olmak",
+        "Her hafta pahalı bir etkinlik yapmak",
+        "Birbirimizin bütün boş zamanını doldurmak"
+      ],
+      "answer": "Birbirimize ilk günkü gibi sevmeye devam etmek",
+      "points": 15
+    },
+    {
+      "id": 3,
+      "question": "İleride bir evimiz olduğunda Yusuf'un en çok hoşuna gidecek şey hangisi olur?",
+      "options": [
+        "Eve geldiğinde seni orada bulmak",
+        "Evin çok büyük olması",
+        "Sürekli misafir ağırlamak",
+        "Her şeyin kusursuz ve düzenli olması"
+      ],
+      "answer": "Eve geldiğinde seni orada bulmak",
+      "points": 15
+    },
+    {
+      "id": 4,
+      "question": "İkimiz nasıl uyuyamayız?",
+      "options": [
+        "Sağa dönük",
+        "Sola dönük",
+        "Sarılarak",
+        "Küs"
+      ],
+      "answer": "Küs",
+      "points": 15
+    },
+    {
+      "id": 5,
+      "question": "Yusuf Zehradan ilk kez ne istedi?",
+      "options": [
+        "İlaç",
+        "Uyumak",
+        "Görüntülü konuşmak",
+        "Para"
+      ],
+      "answer": "Görüntülü konuşmak",
+      "points": 15
+    },
+    {
+      "id": 6,
+      "question": "Yusuf'un en sevdiği meyve hangisi?",
+      "options": [
+        "Elma",
+        "Armut",
+        "Kiraz",
+        "Muz"
+      ],
+      "answer": "Muz",
+      "points": 15
+    },
+    {
+      "id": 7,
+      "question": "Yusuf'un hayalindeki tatil ne olurdu?",
+      "options": [
+        "Seninle sakin, güzel manzaralı ve bol sohbetli bir tatil",
+        "Her gün farklı bir gece hayatı",
+        "Tek başına macera dolu bir seyahat",
+        "Tatil boyunca sürekli alışveriş"
+      ],
+      "answer": "Seninle sakin, güzel manzaralı ve bol sohbetli bir tatil",
+      "points": 10
+    },
+    {
+      "id": 8,
+      "question": "Yusuf'un en sevdiği renk nedir?",
+      "options": [
+        "Kırmızı",
+        "Mavi",
+        "Yeşil",
+        "Sarı"
+      ],
+      "answer": "Mavi",
+      "points": 10
+    },
+    {
+      "id": 9,
+      "question": "Yusuf Zehrasına ne diye seslenmez?",
+      "options": [
+        "Zehra",
+        "Zehracım",
+        "Rüveyda",
+        "Birtanem"
+      ],
+      "answer": "Rüveyda",
+      "points": 15
+    },
+    {
+      "id": 10,
+      "question": "Yusuf Zehrasına ne diye seslenecek?",
+      "options": [
+        "Rüveydam",
+        "Zehram",
+        "Birtanem",
+        "Canım"
+      ],
+      "answer": "Rüveydam",
+      "points": 15
+    },
+    {
+      "id": 11,
+      "question": "Yusuf'a göre evlilikte romantizm nasıl korunmalı?",
+      "options": [
+        "Küçük sürprizler, ilgi ve birbirini hâlâ heyecanla sevmek",
+        "Sadece özel günlerde hediye almak",
+        "Romantizmi ilk yıllara bırakmak",
+        "Sürekli büyük organizasyonlar yapmak"
+      ],
+      "answer": "Küçük sürprizler, ilgi ve birbirini hâlâ heyecanla sevmek",
+      "points": 15
+    },
+    {
+      "id": 12,
+      "question": "Yusuf bir gün birlikte başka bir şehirde yaşama fırsatımız olsa neyi ön planda tutar?",
+      "options": [
+        "Birlikte mutlu ve huzurlu bir hayat kurabilmeyi",
+        "Şehrin ne kadar popüler olduğunu",
+        "Arkadaşlarına yakın olmayı",
+        "Sadece evin büyüklüğünü"
+      ],
+      "answer": "Birlikte mutlu ve huzurlu bir hayat kurabilmeyi",
+      "points": 10
+    },
+    {
+      "id": 13,
+      "question": "Yusuf'a göre bir ilişkide en zor zamanlarda ne yapılmalı?",
+      "options": [
+        "Birbirimize karşı değil, soruna karşı birlikte mücadele etmek",
+        "Kimin daha güçlü olduğunu göstermek",
+        "Her şeyi zamana bırakıp konuşmamak",
+        "Birbirimizden beklentilerimizi tamamen kesmek"
+      ],
+      "answer": "Birbirimize karşı değil, soruna karşı birlikte mücadele etmek",
+      "points": 15
+    },
+    {
+      "id": 14,
+      "question": "Yusuf ileride birlikte bir akşam geçireceksek hangisini tercih eder?",
+      "options": [
+        "Evde baş başa yemek yiyip uzun uzun sohbet etmek",
+        "Her akşam kalabalık bir ortamda olmak",
+        "İkimizin de ayrı program yapması",
+        "Sadece televizyon izlemek ve hiç konuşmamak"
+      ],
+      "answer": "Evde baş başa yemek yiyip uzun uzun sohbet etmek",
+      "points": 10
+    },
+    {
+      "id": 15,
+      "question": "Yusuf'un sence gelecekte senden en çok beklediği şey nedir?",
+      "options": [
+        "Hayatın her döneminde birbirimizin yanında olmak",
+        "Her zaman onunla aynı fikirde olmak",
+        "Bütün hobilerini paylaşmak",
+        "Hiçbir konuda anlaşmazlık yaşamamak"
+      ],
+      "answer": "Hayatın her döneminde birbirimizin takım arkadaşı olmak",
+      "points": 20
+    },
+    {
+      "id": 16,
+      "question": "Yusuf'a göre güzel bir aile ortamının temelinde ne olmalı?",
+      "options": [
+        "Sevgi, saygı, güven ve birlikte geçirilen zaman",
+        "Maddi imkânların sınırsız olması",
+        "Herkesin kendi hayatını yaşaması",
+        "Dışarıdan kusursuz görünmek"
+      ],
+      "answer": "Sevgi, saygı, güven ve birlikte geçirilen zaman",
+      "points": 15
+    },
+    {
+      "id": 17,
+      "question": "Yusuf bir gün geçmişimize dönüp baktığında hangi cümleyi söylemek ister?",
+      "options": [
+        "İyi ki bütün bu yolları birlikte yürümüşüz",
+        "Keşke daha çok vakit geçirseydik",
+        "Keşke beraber daha çok seyahat edseydik",
+        "Keşke birbirimizi daha çok tanısaydık"
+      ],
+      "answer": "İyi ki bütün bu yolları birlikte yürümüşüz",
+      "points": 15
+    },
+    {
+      "id": 18,
+      "question": "Yusuf'a göre birlikte kuracağımız hayatta bireysel alanımız nasıl olmalı?",
+      "options": [
+        "Birbirimizin özel alanına saygı duyup ortak hayatımızı da korumalıyız",
+        "Her şeyi birlikte yapmak zorundayız",
+        "Birbirimizden tamamen bağımsız yaşamalıyız",
+        "Bütün kararları tek kişi vermeli"
+      ],
+      "answer": "Birbirimizin özel alanına saygı duyup ortak hayatımızı da korumalıyız",
+      "points": 15
+    },
+    {
+      "id": 19,
+      "question": "Yusuf için gelecekte seni mutlu görmek neden önemli?",
+      "options": [
+        "Çünkü senin mutluluğun onun da hayatının bir parçası",
+        "Çünkü herkes mutlu görünmeli",
+        "Çünkü sorun yaşamak istemiyor",
+        "Çünkü yalnızca özel günlerde mutlu olmanı istiyor"
+      ],
+      "answer": "Çünkü senin mutluluğun onun da hayatının bir parçası",
+      "points": 15
+    },
+    {
+      "id": 20,
+      "question": "Yusuf'un en sevdiği kişi kimdir?",
+      "options": [
+        "Zehra",
+        "Zehra Rüveyda",
+        "Zehra Rüveyda Tabak",
+        "Zehra Rüveyda Tabak Bakırcı"
+      ],
+      "answer": "Zehra Rüveyda Tabak",
+      "points": 20,
+      "wrongNotes": {
+        "Zehra Rüveyda Tabak Bakırcı": "Daha öyle biri yok"
+      }
+    }
+  ]
+}

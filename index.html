@@ -46,10 +46,12 @@
       <p class="landing-eyebrow">Zehra'ya</p>
       <h1 class="landing-title" id="landingTitle">Mektuplarım</h1>
       <button class="landing-btn" id="goLettersBtn" type="button">Mektuplara git</button>
+      <button class="landing-btn landing-btn-alt" id="goGameBtn" type="button">Oyuna git</button>
     </div>
   </section>
 
   <nav class="archive-menu" aria-label="Mektup arşivi" hidden>
+    <button class="archive-toggle" id="lettersGameBtn" type="button">Oyun</button>
     <button
       class="archive-toggle"
       id="archiveBtn"
@@ -92,6 +94,14 @@
       </div>
     </button>
   </main>
+
+  <section class="game" id="game" aria-label="Oyun" hidden>
+    <div class="game-nav">
+      <button class="archive-toggle" id="gameHomeBtn" type="button">Ana sayfa</button>
+      <button class="archive-toggle" id="gameLettersBtn" type="button">Mektuplar</button>
+    </div>
+    <div class="game-card" id="gameCard" aria-live="polite"></div>
+  </section>
 
   <div class="petal-field" id="petalField" aria-hidden="true"></div>
 

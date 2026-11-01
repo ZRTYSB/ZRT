@@ -187,6 +187,272 @@ body.is-landing .stage {
   transform: scale(0.98);
 }
 
+.landing-btn + .landing-btn {
+  margin-top: 0.7rem;
+}
+
+.landing-btn-alt {
+  color: var(--wax);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(122, 59, 59, 0.45);
+}
+
+.landing-btn-alt:hover,
+.landing-btn-alt:focus-visible {
+  background: rgba(122, 59, 59, 0.07);
+}
+
+.stage[hidden],
+.archive-menu[hidden],
+.game[hidden] {
+  display: none;
+}
+
+.game {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  padding:
+    max(4.5rem, calc(env(safe-area-inset-top) + 3.75rem))
+    max(1rem, env(safe-area-inset-right))
+    max(1.25rem, env(safe-area-inset-bottom))
+    max(1rem, env(safe-area-inset-left));
+  animation: gameFadeIn 0.5s var(--ease-out);
+}
+
+.game-nav {
+  position: fixed;
+  top: max(1rem, env(safe-area-inset-top));
+  right: max(1rem, env(safe-area-inset-right));
+  display: flex;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.game-card {
+  width: min(100%, 520px);
+  padding: clamp(1.5rem, 5vw, 2.25rem) clamp(1.25rem, 4.5vw, 2rem);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34), transparent 34%),
+    var(--paper);
+  border: 1px solid rgba(42, 36, 56, 0.1);
+  box-shadow: 0 22px 48px rgba(50, 35, 20, 0.18);
+  text-align: center;
+}
+
+.game-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.7rem, 6.5vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.game-text,
+.game-status {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 1.25rem;
+}
+
+.game-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1.4rem;
+}
+
+.game-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.75rem 0.25rem;
+  border-radius: 12px;
+  background: rgba(74, 124, 188, 0.08);
+  border: 1px solid rgba(74, 124, 188, 0.16);
+}
+
+.game-stat-value {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1;
+  color: #355f9c;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.game-stat-name {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.game-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.6rem;
+}
+
+.game-head strong {
+  color: #355f9c;
+  font-weight: 500;
+}
+
+.game-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(42, 36, 56, 0.08);
+  overflow: hidden;
+  margin-bottom: 1.35rem;
+}
+
+.game-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #7eafdf, #3f74b5);
+  transition: width 0.4s var(--ease-out);
+}
+
+.game-points {
+  display: inline-block;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f7f1e6;
+  background: linear-gradient(180deg, #5d8fcc, #355f9c);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.8rem;
+}
+
+.game-question {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.35rem, 5vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 1.2rem;
+}
+
+.game-options {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.game-option {
+  appearance: none;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(42, 36, 56, 0.16);
+  background: rgba(255, 255, 255, 0.55);
+  font-family: "Outfit", sans-serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s var(--ease-out);
+}
+
+.game-option:not(:disabled):hover,
+.game-option:not(:disabled):focus-visible {
+  background: rgba(74, 124, 188, 0.1);
+  border-color: rgba(74, 124, 188, 0.45);
+  outline: none;
+}
+
+.game-option:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+.game-option:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.game-option.is-correct {
+  opacity: 1;
+  background: rgba(76, 155, 110, 0.16);
+  border-color: rgba(56, 135, 90, 0.7);
+}
+
+.game-option.is-wrong {
+  opacity: 1;
+  background: rgba(122, 59, 59, 0.12);
+  border-color: rgba(122, 59, 59, 0.6);
+}
+
+.game-feedback:not(:empty) {
+  margin-top: 1.2rem;
+  animation: gameFadeIn 0.35s var(--ease-out);
+}
+
+.game-verdict {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.game-verdict.is-correct {
+  color: #2f7a52;
+}
+
+.game-verdict.is-wrong {
+  color: var(--wax);
+}
+
+.game-note {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+.game-score {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(3.2rem, 14vw, 4.4rem);
+  font-weight: 600;
+  line-height: 1;
+  color: #355f9c;
+  margin-bottom: 0.4rem;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.game-score small {
+  font-size: 0.45em;
+  color: var(--ink-soft);
+}
+
+.game-best-badge {
+  display: inline-block;
+  margin-bottom: 0.9rem;
+}
+
+@keyframes gameFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .ambient-hearts {
   position: fixed;
   inset: 0;
@@ -279,6 +545,8 @@ body.is-landing .stage {
   top: max(1rem, env(safe-area-inset-top));
   right: max(1rem, env(safe-area-inset-right));
   z-index: 30;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .archive-toggle {
