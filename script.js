@@ -19,12 +19,39 @@ const STORAGE_KEY = "zehra-letters-v1";
 const MEETING_AT = new Date("2026-10-23T10:00:00+03:00");
 const DEFAULT_MUSIC = { videoId: "T1bDNsX6_lA", endSec: 64 };
 const START_LETTER_ID = "2026-08-25"; // Geç Mektup — varsayılan başlangıç
-const NEW_BADGE_LETTER_ID = "2026-10-23"; // yalnızca bu mektupta "Yeni" rozeti
+const NEW_BADGE_LETTER_ID = "2026-11-05"; // yalnızca bu mektupta "Yeni" rozeti
 const LETTER_REVEAL_MS = 1250;
 const PETAL_CLEANUP_MS = 11000;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const SEED_LETTERS = [
+  {
+    id: "2026-11-05",
+    title: "Yusufça Sevmek",
+    date: "5 Kasım 2026",
+    dateTime: "2026-11-05",
+    music: {
+      url: "https://www.youtube.com/watch?v=ot1UxWuSbpk",
+      videoId: "ot1UxWuSbpk",
+      endSec: 270, // 4:30
+    },
+    greeting: "Hayatımın anlamı, birtanecik sevdiğim…",
+    body: [
+      "Bazen düşünüyorum da sevgi dediğimiz şey, iki insanın birbirini sevdiğini söylemesinden çok daha fazlası. Hatta belki de sevginin en güzel tarafı, söylenen sözlerden ziyade insanın davranışlarında saklı.",
+      "Sevmek, zor zamanlarda kapıyı çekip gitmek değil, o zorluğun içinden el ele geçmeye çalışmaktır. Her şey yolundayken yanında olmak değil, işler yolunda gitmediğinde de aynı yerde durabilmektir. Sevgi, yalnızca güzel günleri paylaşmak değil, güzel olmayan günlerde de birbirine güzel gelebilmektir.",
+      "Sevmek, karşındaki insanı kendine benzetmeye çalışmak değil, onun senden farklı yanlarını da sevebilmektir. Onu kendi doğrularına göre değiştirmek değil, olduğu insanı tanımak, anlamak ve bütün hâliyle kabul etmektir. Çünkü insan sevdiği kişiyi kusursuz olduğu için değil, bütün kusurlarına, farklılıklarına ve kendine has yanlarına rağmen değil, tam da onlarla birlikte sever.",
+      "Sevmek, her anlaşmazlıkta vazgeçmeyi düşünmek değil, bazen kendi haklılığından vazgeçip birbirini anlamayı seçmektir. Her tartışmayı kazanmak değil, tartışmanın sonunda birbirimizi kaybetmemiş olmayı önemsemektir. Birbirimizin kalbini kırdıktan sonra haklı çıkmanın hiçbir anlamı olmadığını bilmektir.",
+      "Sevmek, yalnızca güzel sözler söylemek değil, o sözleri söylerken bile karşındakinin kalbini düşünmektir. Bir cümlenin onu nasıl hissettireceğini hesaba katmak, en mutlu olduğu anda bile incinme ihtimalini önemsemektir. Bazen söyleyecek çok şeyin varken susmayı, bazen de susmak yerine sarılıp her şeyi anlatmayı bilmektir.",
+      "Sevmek, bir insanın hayatına girmek kadar o hayatta kalabilmek için de emek vermektir. Onun hayallerini kendi hayallerin kadar önemsemek, mutluluğunu kendi mutluluğundan ayrı görmemek, düştüğünde elinden tutmak ama yürüyebileceğine de inanmasını sağlamaktır.",
+      "Ve biliyor musun hayatım, ben seni tam olarak böyle seviyorum. Birbirimizi hiç üzmediğimiz, hiç anlaşmazlık yaşamadığımız bir hayatın mümkün olduğunu düşünmüyorum. Ama ne yaşarsak yaşayalım birbirimizin kalbini ve bu ilişkinin kıymetini unutmadığımız bir hayat istiyorum. Birbirimizi değiştirmeye çalışmadan birlikte büyüdüğümüz, hayallerimize ortak olduğumuz, bazen çocuklar gibi güldüğümüz, bazen de hiçbir şey konuşmadan birbirimize sarılmanın yettiği bir hayat…",
+      "Ben seninle sadece bugünü değil, henüz yaşamadığımız bütün yarınları da istiyorum. Birlikte vereceğimiz kararları, kuracağımız düzeni, küçük mutluluklarımızı, uzun sohbetlerimizi, sıradan günlerimizi… Yıllar geçse de sana bakarken içimden gelen o güzel hissin eksilmemesini istiyorum.",
+      "Sana verebileceğim en güzel söz, her şeyin hep mükemmel olacağı değil. Seni anlamaya çalışmaktan, sana özen göstermekten, birlikte kurduğumuz bu güzel şeye emek vermekten vazgeçmeyeceğim.",
+      "Bu mektupta sevgimi sana biraz daha detaylandırmaya çalıştım. Bir tanem mektubumu tam dört gün boyunca parça parça yazdım. En doğru cümleleri bulabilmek için. Sen benim her şeyimsin. Umarım sende benim sana hissettiğim gibi bir sevgi hissediyorsundur. Ama kabul etki ben seni daha çok seviyorum benim bir tanecik Zehram.",
+      "İyi ki hayatımdasın bebeğim. İyi ki yollarımız kesişmiş, iyi ki seni tanımışım. Ben seninle aynı yolda yürümeyi, o yolun her hâlini seninle yaşamayı çok istiyorum.",
+    ],
+    closing: "Seni çok seviyorum, canımın içi.",
+    signature: "Yusuf",
+  },
   {
     id: "2026-10-23",
     title: "Kavuşma",
