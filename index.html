@@ -30,6 +30,25 @@
           <span class="countdown-value" data-unit="hours">00</span>
           <span class="countdown-name">Saat</span>
         </div>
+        <div class="countdown-heartbeat" id="countdownHeartbeat" aria-hidden="true">
+          <svg class="ecg" viewBox="0 0 320 64" preserveAspectRatio="none">
+            <line class="ecg-baseline" x1="0" y1="32" x2="320" y2="32" />
+            <path
+              class="ecg-path"
+              d="M0 32 H48
+                 C54 32 56 28 60 28
+                 C64 28 66 32 70 32
+                 H102
+                 L112 32 L120 8 L128 56 L136 24 L142 32
+                 H176
+                 C184 32 188 18 196 18
+                 C204 18 208 32 216 32
+                 H320"
+            />
+          </svg>
+          <span class="ecg-scan"></span>
+          <span class="ecg-bpm" id="ecgBpm">60 BPM</span>
+        </div>
         <div class="countdown-unit">
           <span class="countdown-value" data-unit="minutes">00</span>
           <span class="countdown-name">Dakika</span>

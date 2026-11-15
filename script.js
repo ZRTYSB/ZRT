@@ -15,16 +15,48 @@ const ambientHearts = document.getElementById("ambientHearts");
 const archiveMenu = document.querySelector(".archive-menu");
 
 const STORAGE_KEY = "zehra-letters-v1";
-// Türkiye saatiyle 23 Ekim 2026, 10:00
-const MEETING_AT = new Date("2026-10-23T10:00:00+03:00");
+// Türkiye saatiyle 28 Kasım 2026, 17:00
+const MEETING_AT = new Date("2026-11-28T17:00:00+03:00");
 const DEFAULT_MUSIC = { videoId: "T1bDNsX6_lA", endSec: 64 };
 const START_LETTER_ID = "2026-08-25"; // Geç Mektup — varsayılan başlangıç
-const NEW_BADGE_LETTER_ID = "2026-11-05"; // yalnızca bu mektupta "Yeni" rozeti
+const NEW_BADGE_LETTER_ID = "2026-11-15"; // yalnızca bu mektupta "Yeni" rozeti
 const LETTER_REVEAL_MS = 1250;
 const PETAL_CLEANUP_MS = 11000;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const SEED_LETTERS = [
+  {
+    id: "2026-11-15",
+    title: "Tanışma Haberi",
+    date: "15 Kasım 2026",
+    dateTime: "2026-11-15",
+    music: {
+      url: "https://www.youtube.com/watch?v=ZeS7Fjk2sKk",
+      videoId: "ZeS7Fjk2sKk",
+      endSec: 239, // 3:59
+    },
+    greeting: "Benim güzel Zehram,",
+    body: [
+      "Bu ayın sonunu düşündükçe içimde neler olup bittiğini bir bilsen… Bir yandan günler bir an önce geçsin istiyorum, bir yandan da o gün geldiğinde nasıl davranacağımı, ne söyleyeceğimi, heyecanımı ne kadar belli edeceğimi düşünüyorum. Hatta bazen kendi kendime gülüyorum. Seninle saatlerce konuşabilen, sana söyleyecek sözü hiç bitmeyen ben, ailenle tanışacağım günü düşününce şimdiden söyleyeceğim cümleleri kafamda prova ediyorum.",
+      "Garip değil mi birtanem? Seni tanımadan önce varlığından bile haberdar olmadığım insanlar, bugün benim için böylesine önemli bir hâle geldi. Annenin, babanın karşısına çıkacak olmak beni heyecanlandırıyor. Çünkü onlar benim için yalnızca tanışacağım insanlar değil. Onlar benim bu kadar sevdiğim, hayatımda bu kadar kıymetli bir yere koyduğum kadının ailesi. Senin büyüdüğün evin, çocukluğunun, bugün olduğun insanın bir parçası olan insanlarla tanışacağım. Bunu düşündüğümde bile yüzümde bir gülümseme oluşuyor.",
+      "Senden saklayacak değilim, biraz da geriliyorum. Acaba nasıl karşılanacağım, hakkımda ne düşünecekler, kendimi doğru anlatabilecek miyim? İlk birkaç dakika nasıl geçecek? Bunların hepsi aklımdan geçiyor. Belki normalde hiç düşünmeyeceğim ayrıntıları bile düşünüyorum. Ama bu gerginliğin sebebi korkmam değil hayatım. Ben bu tanışmanın güzel geçmesini gerçekten çok istiyorum. Çünkü seninle ilgili hiçbir şeyi gelişigüzel yaşamıyorum. Hele ki ailelerimizin de dâhil olmaya başladığı böyle bir dönemi…",
+      "Bir de işin en güzel tarafı var. Bütün bu heyecanın arasında öyle mutluyum ki! Bazen durup kendi kendime soruyorum: Gerçekten bu noktaya geldik mi biz? 7 Haziran'da başlayan konuşmalarımız bizi buraya mı getirdi? O günlerde seninle konuşabilmek için heyecanlanan ben, şimdi ailenle tanışmak için gün sayıyorum. Üstelik bu kez heyecanım yalnızca seni görecek olmaktan kaynaklanmıyor. Senin hayatında biraz daha yakından yer alacak olmanın mutluluğunu da yaşıyorum.",
+      "Hatırlıyor musun bilmiyorum, ilk zamanlarımızda içimden hep dualar ediyordum. Anlaşabilecek miyiz, birbirimizi sevecek miyiz, acaba her şey güzel ilerleyecek mi diye… Şimdi dönüp baktığımda o günlerde kurduğum bazı hayallerin yavaş yavaş gerçeğe dönüşüyor olması beni çok duygulandırıyor. Rabbime şükrediyorum. İnşallah bundan sonrası da ikimiz için hayırlı ve güzel olur.",
+      "Biliyor musun kelebeğim, bazen seninle ilgili öyle bir heyecana kapılıyorum ki kendimi durduramıyorum. Daha ayın sonu gelmeden o günü defalarca yaşadım kafamda. Kapıdan girişimi, ilk selamlaşmamızı, oturup sohbet etmemizi… Hatta senin bana bakıp heyecanımı anlayacağını düşünüyorum. Muhtemelen sonrasında benimle biraz dalga da geçersin. Ama geç bakalım, senin yüzünden bu hâldeyim zaten. ❤️",
+      "Şaka bir yana canımın içi, benim için bu tanışmanın anlamı çok büyük. Çünkü ben seni hayatımın gelip geçici bir dönemine sığdırmıyorum. Seni sevdiğimi söylerken ne kadar ciddi olduğumu sen biliyorsun. Seninle ilgili niyetimin, kurduğum hayallerin ve sana duyduğum sevginin ne kadar gerçek olduğunu da biliyorsun. Şimdi bunların hayatımızda karşılık bulmaya başlaması beni hem heyecanlandırıyor hem de tarifsiz bir şekilde mutlu ediyor.",
+      "Bir şey daha var sana söylemek istediğim. Ben ailenle tanışırken kendimi olduğumdan farklı göstermeye çalışmak istemiyorum. Beni olduğum gibi tanısınlar istiyorum. Elbette kusurlarım var, eksiklerim var, bazen gereğinden fazla heyecanlanıyorum, bazen de söylemek istediğim şeyleri tam olarak anlatamıyorum. Ama bir konuda içim çok rahat: Kızlarını ne kadar sevdiğimi ve ona karşı ne kadar güzel niyetler taşıdığımı biliyorum. Umarım zamanla onlar da bunu görürler. Bir de en damat ben olacağım.",
+      "Zehram, seninle ilgili en çok hoşuma giden şeylerden biri de bu aslında. Bana daha önce yaşamadığım heyecanlar yaşatıyorsun. Seni ilk göreceğim günü beklemek başka güzeldi, sana yeniden kavuşacağım günü beklemek başka… Şimdi ise bambaşka bir heyecanın içindeyim. Her defasında seni sevmenin yeni bir tarafıyla karşılaşıyorum. Ve inan bana, bu duyguların hiçbirinden vazgeçmek istemiyorum.",
+      "Bu ayın sonunda nasıl bir gün geçireceğimizi henüz bilmiyorum. Belki düşündüğümden çok daha rahat olacağım, belki heyecandan bazı cümleleri birbirine karıştıracağım. Ama o günün sonunda sana dönüp gülümseyebilmek, seninle bu güzel adımı da yaşamış olmak bana çok iyi gelecek.",
+      "Birtanem, sana olan sevgimi anlatmak için bugüne kadar çok fazla cümle kurdum. Bu kez senden tek bir şey bilmeni istiyorum: Ben seninle ilgili yaşadığımız her güzel gelişmeye, sanki hayatımın en güzel haberiymiş gibi seviniyorum. Çünkü gerçekten öyle hissediyorum. Seninle geleceğe dair konuşabilmek bile beni mutlu ederken, şimdi o geleceğe doğru somut bir adım atacak olmak beni yerimde duramaz hâle getiriyor.",
+      "Ayın sonu bir an önce gelsin istiyorum bebeğim. Hem seni göreyim, hem aileni tanıyayım, hem de yıllar sonra inşallah birlikte gülümseyerek hatırlayacağımız bir günümüz daha olsun.",
+      "Allah hakkımızda hayırlısını nasip etsin benim güzel sevdiceğim. Eğer nasibimiz birbirimizsek, bugün içimizde taşıdığımız bu heyecanı bir gün aynı yuvanın içinde, çok daha güzel mutluluklarla hatırlayalım.",
+    ],
+    closing: [
+      "Seni çok seviyorum Zehram. Hem de bu satırları yazarken yüzümde oluşan gülümsemeyi sana gösterebilmeyi isteyecek kadar.",
+      "Seninle yaşayacaklarımız için çok heyecanlıyım, benim bir tanecik kelebeğim.",
+    ],
+    signature: "Seni çok seven Yusuf'un. ❤️",
+  },
   {
     id: "2026-11-05",
     title: "Yusufça Sevmek",
@@ -1087,22 +1119,89 @@ const AMBIENT_HEART_PALETTE = [
 const AMBIENT_HEART_MAX = 16;
 
 let countdownTimer = null;
+let heartbeatTimer = null;
 let ambientHeartTimer = null;
+
+const BPM_MIN = 60;
+const BPM_MAX = 100;
+// Bu süreden uzakken sakin kalır; yaklaştıkça BPM yükselir
+const BPM_HORIZON_MS = 21 * 24 * 60 * 60 * 1000;
 
 function pad2(value) {
   return String(value).padStart(2, "0");
 }
 
+function getCountdownDiff() {
+  return MEETING_AT.getTime() - Date.now();
+}
+
+function getMeetingBpm(diff = getCountdownDiff()) {
+  if (diff <= 0) return BPM_MAX;
+  const proximity = 1 - Math.min(Math.max(diff / BPM_HORIZON_MS, 0), 1);
+  // Son günlerde daha belirgin yükselsin
+  const eased = proximity * proximity;
+  return Math.round(BPM_MIN + (BPM_MAX - BPM_MIN) * eased);
+}
+
+function stopCountdownHeartbeat() {
+  window.clearTimeout(heartbeatTimer);
+  heartbeatTimer = null;
+}
+
+function beatCountdownHeart(bpm) {
+  const heartbeat = document.getElementById("countdownHeartbeat");
+  if (!heartbeat) return;
+
+  const safeBpm = Math.min(Math.max(bpm || BPM_MIN, BPM_MIN), BPM_MAX);
+  const intervalMs = 60000 / safeBpm;
+  const animMs = Math.max(280, Math.min(intervalMs * 0.82, intervalMs - 40));
+
+  heartbeat.style.setProperty("--ecg-duration", `${animMs}ms`);
+  const bpmLabel = document.getElementById("ecgBpm");
+  if (bpmLabel) bpmLabel.textContent = `${safeBpm} BPM`;
+
+  if (prefersReducedMotion) return;
+
+  heartbeat.classList.remove("is-beating");
+  void heartbeat.offsetWidth;
+  heartbeat.classList.add("is-beating");
+}
+
+function scheduleCountdownHeartbeat() {
+  stopCountdownHeartbeat();
+  if (!countdownGrid || countdownGrid.hidden || prefersReducedMotion) {
+    const bpm = getMeetingBpm();
+    const bpmLabel = document.getElementById("ecgBpm");
+    if (bpmLabel) bpmLabel.textContent = `${bpm} BPM`;
+    return;
+  }
+
+  const tick = () => {
+    const diff = getCountdownDiff();
+    if (diff <= 0) {
+      stopCountdownHeartbeat();
+      return;
+    }
+
+    const bpm = getMeetingBpm(diff);
+    beatCountdownHeart(bpm);
+    heartbeatTimer = window.setTimeout(tick, 60000 / bpm);
+  };
+
+  tick();
+}
+
 function updateCountdown() {
   if (!countdownGrid) return;
 
-  const diff = MEETING_AT.getTime() - Date.now();
+  const diff = getCountdownDiff();
 
   if (diff <= 0) {
     countdownGrid.hidden = true;
     if (countdownDone) countdownDone.hidden = false;
     window.clearInterval(countdownTimer);
     countdownTimer = null;
+    stopCountdownHeartbeat();
     return;
   }
 
@@ -1118,6 +1217,10 @@ function updateCountdown() {
     const el = countdownGrid.querySelector(`[data-unit="${unit}"]`);
     if (el && el.textContent !== value) el.textContent = value;
   }
+
+  // BPM etiketini saniye güncellemesinde de taze tut
+  const bpmLabel = document.getElementById("ecgBpm");
+  if (bpmLabel) bpmLabel.textContent = `${getMeetingBpm(diff)} BPM`;
 }
 
 function spawnAmbientHeart() {
@@ -1473,4 +1576,5 @@ renderActiveLetter();
 scheduleLetterUnlocks();
 updateCountdown();
 countdownTimer = window.setInterval(updateCountdown, 1000);
+scheduleCountdownHeartbeat();
 startAmbientHearts();

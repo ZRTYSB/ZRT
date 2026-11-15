@@ -87,7 +87,8 @@ body.is-landing .stage {
 
 .countdown-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(110px, 1.35fr) repeat(2, minmax(0, 1fr));
+  align-items: stretch;
   gap: clamp(0.4rem, 2vw, 0.75rem);
 }
 
@@ -99,6 +100,7 @@ body.is-landing .stage {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.2rem;
   padding: clamp(0.65rem, 2.6vw, 0.95rem) 0.25rem;
   border-radius: 14px;
@@ -106,6 +108,159 @@ body.is-landing .stage {
   border: 1px solid rgba(74, 124, 188, 0.18);
   box-shadow: 0 10px 24px rgba(50, 60, 90, 0.1);
   backdrop-filter: blur(8px);
+}
+
+.countdown-heartbeat {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100%;
+  padding: 0.45rem 0.35rem 1.15rem;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(231, 242, 252, 0.88), rgba(247, 241, 230, 0.72));
+  border: 1px solid rgba(74, 124, 188, 0.22);
+  box-shadow:
+    0 10px 24px rgba(50, 60, 90, 0.1),
+    inset 0 0 18px rgba(74, 124, 188, 0.08);
+  overflow: hidden;
+}
+
+.countdown-heartbeat::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(74, 124, 188, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 124, 188, 0.08) 1px, transparent 1px);
+  background-size: 12px 12px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.ecg {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: clamp(42px, 9vw, 56px);
+  overflow: visible;
+}
+
+.ecg-baseline {
+  stroke: rgba(74, 124, 188, 0.22);
+  stroke-width: 1;
+}
+
+.ecg-path {
+  fill: none;
+  stroke: #3f74b5;
+  stroke-width: 2.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 460;
+  stroke-dashoffset: 460;
+  filter: drop-shadow(0 0 5px rgba(74, 124, 188, 0.65));
+}
+
+.countdown-heartbeat.is-beating .ecg-path {
+  animation: ecgTrace var(--ecg-duration, 0.92s) cubic-bezier(0.22, 0.8, 0.28, 1) forwards;
+}
+
+.countdown-heartbeat.is-beating {
+  animation: ecgPulse var(--ecg-duration, 0.92s) ease-out;
+}
+
+.ecg-scan {
+  position: absolute;
+  top: 18%;
+  bottom: 28%;
+  left: 0;
+  z-index: 2;
+  width: 3px;
+  border-radius: 999px;
+  background: #7eafdf;
+  box-shadow:
+    0 0 8px rgba(126, 175, 223, 0.95),
+    0 0 16px rgba(63, 116, 181, 0.55);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.countdown-heartbeat.is-beating .ecg-scan {
+  animation: ecgScan var(--ecg-duration, 0.92s) linear forwards;
+}
+
+.ecg-bpm {
+  position: absolute;
+  left: 50%;
+  bottom: 0.35rem;
+  transform: translateX(-50%);
+  z-index: 1;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #355f9c;
+  opacity: 0.8;
+}
+
+@keyframes ecgTrace {
+  0% {
+    stroke-dashoffset: 460;
+    opacity: 1;
+  }
+  78% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.55;
+  }
+}
+
+@keyframes ecgScan {
+  0% {
+    opacity: 0;
+    left: 4%;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+    left: 94%;
+  }
+}
+
+@keyframes ecgPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 10px 24px rgba(50, 60, 90, 0.1),
+      inset 0 0 18px rgba(74, 124, 188, 0.08);
+  }
+  18% {
+    box-shadow:
+      0 10px 24px rgba(50, 60, 90, 0.12),
+      inset 0 0 22px rgba(74, 124, 188, 0.22),
+      0 0 0 1px rgba(74, 124, 188, 0.18);
+  }
+}
+
+@media (max-width: 640px) {
+  .countdown-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "days hours"
+      "heart heart"
+      "minutes seconds";
+  }
+
+  .countdown-unit:nth-child(1) { grid-area: days; }
+  .countdown-unit:nth-child(2) { grid-area: hours; }
+  .countdown-heartbeat { grid-area: heart; min-height: 72px; }
+  .countdown-unit:nth-child(4) { grid-area: minutes; }
+  .countdown-unit:nth-child(5) { grid-area: seconds; }
 }
 
 .countdown-value {
@@ -1086,9 +1241,21 @@ body.archive-open .archive-panel {
   .letter,
   .letter-sheet,
   .wax-seal,
-  .fall-piece {
+  .fall-piece,
+  .countdown-heartbeat,
+  .ecg-path,
+  .ecg-scan {
     animation: none !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .ecg-path {
+    stroke-dashoffset: 0;
+    opacity: 0.85;
+  }
+
+  .ecg-scan {
+    display: none;
   }
 
   .stage.is-open .letter,
