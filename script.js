@@ -19,12 +19,41 @@ const STORAGE_KEY = "zehra-letters-v1";
 const MEETING_AT = new Date("2026-11-28T17:00:00+03:00");
 const DEFAULT_MUSIC = { videoId: "T1bDNsX6_lA", endSec: 64 };
 const START_LETTER_ID = "2026-08-25"; // Geç Mektup — varsayılan başlangıç
-const NEW_BADGE_LETTER_ID = "2026-11-15"; // yalnızca bu mektupta "Yeni" rozeti
+const NEW_BADGE_LETTER_ID = "2026-11-22"; // yalnızca bu mektupta "Yeni" rozeti
 const LETTER_REVEAL_MS = 1250;
 const PETAL_CLEANUP_MS = 11000;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const SEED_LETTERS = [
+  {
+    id: "2026-11-22",
+    title: "Son 6 Gün",
+    date: "22 Kasım 2026",
+    dateTime: "2026-11-22",
+    music: {
+      url: "https://www.youtube.com/watch?v=BkuGka1NNCc",
+      videoId: "BkuGka1NNCc",
+      endSec: 224, // 3:44
+    },
+    greeting: "Benim bir tanecik Zehram,",
+    body: [
+      "Bu hafta sana mektup yazarken içimde her zamankinden biraz daha farklı duygular var. Normalde sana bir mektup yazacağım zaman yüzümde bir gülümseme olur. Seni ne kadar sevdiğimi, seninle ilgili kurduğum hayalleri, seni düşündüğümde içimde oluşan o güzel heyecanı anlatmak için sabırsızlanırım. Bugün de seni çok seviyorum. Hatta belki de bu kadar sevdiğim için içimde biriken bazı şeyleri sana anlatmak istiyorum.",
+      "Birtanem, bu hafta birbirimizi biraz fazla yorduk galiba. Bazen anlaşamadık, bazen istemeden kırıldık, bazen de birbirimize söylemek istediğimiz şeyleri doğru anlatamadık. Ama bütün bunların içinde benim içime dokunan küçük bir şey var. Sen bana çok değer verdiğini söylüyorsun ve ben buna inanmak istiyorum. Yalnız bazen bu değeri senin davranışlarında, senin hayatındaki yerimde benim sana verdiğim kadar güçlü hissedemiyorum. Belki sevgimizi gösterme şeklimiz farklıdır, belki de ben bazı şeyleri gereğinden fazla önemsiyorumdur. Bilmiyorum. Bildiğim tek şey, sen benim hayatımda öyle kıymetli bir yerdesin ki senin en küçük üzüntünü bile kendime dert edinebiliyorum. Ve içimden bazen, keşke ben de onun gözünde böyle kıymetli olsam, keşke benim kırgınlığım da onun kalbine benimki kadar dokunsa, diyorum. Bunu sana bir sitem olsun diye değil, içimdeki küçücük bir eksikliği bil diye anlatıyorum. Çünkü ben bir gün senin de bana verdiğin değeri, benim sana verdiğim değeri hissettiğim kadar derinden hissedebilmeyi çok istiyorum.",
+      "Gelecek hafta ailenle tanışacağım. Bunu düşündükçe içimdeki heyecan hâlâ ilk günkü gibi. Bir yandan günler geçsin istiyorum, bir yandan da o gün geldiğinde nasıl davranacağımı düşünüyorum. Daha birkaç ay önce birbirimizi tanımıyorken şimdi senin ailenin karşısına çıkacak olmam bana inanılmaz geliyor. Seni büyüten, bugün olduğun insan olmanda emeği olan insanlarla tanışacağım. Bu benim için sıradan bir ziyaret değil birtanem. Seninle ilgili ne kadar ciddi ve güzel niyetler taşıdığımın hayatımızdaki en anlamlı adımlarından biri.",
+      "Bazen kendi kendime gülüyorum. Acaba annenle baban beni nasıl karşılayacak? İlk konuşmamız nasıl olacak? Heyecanımı belli edecek miyim? Bir de senin o gün bana nasıl bakacağını merak ediyorum. Belki göz göze geldiğimizde gülmemek için kendimizi zor tutacağız. Belki de sen benim heyecanımı fark edip sonrasında günlerce benimle uğraşacaksın. Ama olsun, senin yüzünden yaşadığım bu tatlı heyecana da razıyım. Hem en damat olacağımı söylemiştim, sözümün arkasındayım.",
+      "Zehram, bazen 7 Haziran'dan bugüne kadar yaşadıklarımızı düşünüyorum. İlk konuşmalarımızı, birbirimizi tanımaya çalıştığımız günleri, ilk buluşmamızı, birbirimize alışmamızı… Şimdi ise hayatımızın çok daha farklı bir dönemine doğru ilerliyoruz. Bütün bunların içinde en çok hoşuma giden şey, seni tanıdıkça seninle ilgili hayallerimin azalmak yerine çoğalması. Seni hayatımda yalnızca bugün değil, yıllar sonra da görmek istiyorum. Aynı sofrada oturduğumuz, birbirimize günümüzü anlattığımız, bazen saçma sapan şeylere güldüğümüz, bazen de birbirimize sarılıp bütün yorgunluğumuzu unuttuğumuz bir hayat hayal ediyorum.",
+      "Biliyor musun kelebeğim, seninle ilgili kurduğum hayallerin çoğu aslında çok sıradan. Ama ben o sıradanlığın içinde senin olmanı seviyorum. Birlikte alışverişe gitmeyi, ne yiyeceğimize karar verememeyi, bazen birbirimize takılmayı, bazen senin huysuzluklarını çekmeyi, bazen de benim seni güldürmek için türlü saçmalıklar yapmamı… İnsan sevdiği kişiyle yalnızca özel günleri değil, hayatın bütün küçük ayrıntılarını paylaşmak istiyormuş. Ben bunu seninle öğrendim.",
+      "Bir tanem, seninle ilgili hissettiklerimin en güzel tarafı, hâlâ seni düşünürken heyecanlanıyor olmam. Seni göreceğim günü beklerken içimde oluşan o sabırsızlık, sesini duyduğumda yüzümde beliren gülümseme, seninle ilgili güzel bir gelişme olduğunda yaşadığım mutluluk… Bunların hepsi benim için çok kıymetli. Ve ben bu duyguların yıllar geçse de hayatımızda kalmasını istiyorum.",
+      "İnşallah gelecek hafta hepimiz için çok güzel geçer. İnşallah ailenle güzel bir tanışmamız olur. İnşallah bugün heyecanla beklediğimiz bu günleri ileride birlikte hatırlayıp gülümseriz. Belki bir gün kendi evimizde otururken sana dönüp, \"Hatırlıyor musun, ailenle tanışmadan önce ne kadar heyecanlanmıştım?\" derim. Sen de büyük ihtimalle yine benimle dalga geçersin. Ama ben o gün de bugünkü kadar mutlu olmayı isterim.",
+      "Sana karşı hissettiğim sevginin ne kadar büyük olduğunu anlatmak için bugüne kadar çok fazla mektup yazdım. Belki daha da yüzlercesini yazacağım. Ama her mektubumda değişmeyen bir şey olacak: Ben seni hayatımda olduğun için, seninle bir gelecek düşünebildiğim için ve seni tanıdığım her yeni günde yeniden sevebildiğim için çok seviyorum.",
+      "Rabbim hakkımızda hayırlısını nasip etsin benim güzel sevdiceğim. İnşallah bugün kurduğumuz hayaller, yarın birlikte yaşayacağımız güzel hatıralara dönüşür.",
+    ],
+    closing: [
+      "Seni çok seviyorum benim bir tanecik Zehram.",
+      "Gelecek hafta seni göreceğim, aileni tanıyacağım ve seninle güzel bir anımız daha olacak. Şimdiden sabırsızlanıyorum.",
+    ],
+    signature: "Seni çok seven, seninle ilgili her güzel gelişmede çocuklar gibi sevinen Yusuf'un. ❤️",
+  },
   {
     id: "2026-11-15",
     title: "Tanışma Haberi",
