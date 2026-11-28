@@ -597,6 +597,325 @@ body.is-landing .stage {
   margin-bottom: 0.9rem;
 }
 
+.game-card.is-wide {
+  width: min(100%, 680px);
+}
+
+.az-scores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.az-scores.is-solo {
+  grid-template-columns: minmax(0, 180px);
+  justify-content: center;
+}
+
+.az-score {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.65rem 0.4rem 0.55rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(42, 36, 56, 0.1);
+}
+
+.az-score.is-turn {
+  background: rgba(74, 124, 188, 0.12);
+  border-color: rgba(53, 95, 156, 0.45);
+}
+
+.az-score.is-zehra.is-turn {
+  background: rgba(122, 59, 59, 0.08);
+  border-color: rgba(122, 59, 59, 0.45);
+}
+
+.az-score-value {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1;
+  color: #355f9c;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.az-score.is-zehra .az-score-value {
+  color: var(--wax);
+}
+
+.az-scores-final .az-score-value {
+  font-size: clamp(2.6rem, 10vw, 3.4rem);
+}
+
+.az-score-name {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.az-ring {
+  position: relative;
+  width: min(100%, 360px);
+  aspect-ratio: 1;
+  margin: 0 auto 0.35rem;
+}
+
+.az-ring-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.az-ring-line circle {
+  fill: none;
+  stroke: rgba(122, 59, 59, 0.35);
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+}
+
+.az-ring-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 46%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.az-ring-letter {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(3rem, 12vw, 4.2rem);
+  font-weight: 600;
+  line-height: 0.85;
+  color: #355f9c;
+}
+
+.az-ring-letter.is-zehra {
+  color: var(--wax);
+}
+
+.az-ring-letter.is-shared {
+  color: #2f7a52;
+}
+
+.az-ring-letter.is-miss {
+  color: var(--ink-soft);
+}
+
+.az-ring-center .az-hint {
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+}
+
+.az-ring-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--wax);
+  box-shadow: 0 0 0 6px rgba(122, 59, 59, 0.12);
+}
+
+.az-letter {
+  position: absolute;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--ink-soft);
+  background: #f7f1e6;
+  border: 1px solid rgba(122, 59, 59, 0.28);
+  box-shadow: 0 1px 2px rgba(50, 35, 20, 0.08);
+}
+
+.az-letter.is-yusuf {
+  color: #355f9c;
+  background: rgba(53, 95, 156, 0.16);
+  border-color: rgba(53, 95, 156, 0.28);
+}
+
+.az-letter.is-zehra {
+  color: var(--wax);
+  background: #f4e4e2;
+  border-color: rgba(122, 59, 59, 0.5);
+}
+
+.az-letter.is-shared {
+  color: #2f7a52;
+  background: rgba(76, 155, 110, 0.16);
+  border-color: rgba(56, 135, 90, 0.35);
+}
+
+.az-letter.is-miss {
+  opacity: 0.38;
+}
+
+.az-letter.is-current {
+  z-index: 1;
+  width: 1.7rem;
+  height: 1.7rem;
+  font-size: 0.78rem;
+  color: #f7f1e6;
+  background: var(--wax);
+  border-color: var(--wax);
+  opacity: 1;
+  box-shadow: 0 0 0 4px rgba(122, 59, 59, 0.16);
+}
+
+.az-turn {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.2rem;
+}
+
+.az-handoff {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.35rem;
+}
+
+.az-hero {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(4rem, 18vw, 5.5rem);
+  font-weight: 600;
+  line-height: 0.85;
+  color: #355f9c;
+  margin: 0.15rem 0 0.35rem;
+}
+
+.az-hero.is-zehra {
+  color: var(--wax);
+}
+
+.az-hero.is-shared {
+  color: #2f7a52;
+}
+
+.az-hero.is-miss {
+  color: var(--ink-soft);
+}
+
+.az-hint {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: -0.15rem;
+  margin-bottom: 0.75rem;
+}
+
+.az-input {
+  width: 100%;
+  margin-top: 0.15rem;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(42, 36, 56, 0.16);
+  background: rgba(255, 255, 255, 0.72);
+  font-family: "Outfit", sans-serif;
+  font-size: 1rem;
+  color: var(--ink);
+  text-align: center;
+}
+
+.az-input:focus {
+  outline: none;
+  border-color: rgba(53, 95, 156, 0.55);
+  background: #fff;
+}
+
+.az-error {
+  min-height: 1.15rem;
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--wax);
+}
+
+.az-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+  margin-top: 0.35rem;
+}
+
+.az-actions .landing-btn {
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  padding: 0.85rem 0.55rem;
+}
+
+.az-actions .landing-btn + .landing-btn {
+  margin-top: 0;
+}
+
+.landing-btn.az-btn-yusuf {
+  background: linear-gradient(180deg, #5d8fcc, #355f9c);
+}
+
+.az-back {
+  margin-top: 0.7rem;
+}
+
+.az-legend {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  margin: 0.15rem 0 1rem;
+}
+
+@media (max-height: 760px) {
+  .az-hero {
+    font-size: 3.1rem;
+    margin: 0 0 0.2rem;
+  }
+
+  .az-scores,
+  .az-ring {
+    margin-bottom: 0.2rem;
+  }
+
+  .az-ring {
+    width: min(100%, 280px);
+  }
+
+  .az-ring-letter {
+    font-size: 2.7rem;
+  }
+
+  .az-letter {
+    width: 1.2rem;
+    height: 1.2rem;
+    font-size: 0.58rem;
+  }
+
+  .az-letter.is-current {
+    width: 1.45rem;
+    height: 1.45rem;
+    font-size: 0.68rem;
+  }
+}
+
 @keyframes gameFadeIn {
   from {
     opacity: 0;

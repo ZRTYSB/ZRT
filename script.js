@@ -1331,7 +1331,7 @@ function goToGame() {
   if (stage) stage.hidden = true;
   if (game) game.hidden = false;
   hideLanding();
-  showGameIntro();
+  showGameMenu();
 }
 
 // ---------- Oyun ----------
@@ -1343,6 +1343,8 @@ const GAME_BEST_KEY = "zehra-game-best-v1";
 
 let gameData = null;
 let gameState = null;
+let letterData = null;
+let letterState = null;
 
 function shuffle(list) {
   const copy = [...list];
@@ -1411,8 +1413,27 @@ function saveBestScore(score) {
   }
 }
 
+function setGameCardWide(wide) {
+  gameCard?.classList.toggle("is-wide", Boolean(wide));
+}
+
+function showGameMenu() {
+  if (!gameCard) return;
+  gameState = null;
+  letterState = null;
+  setGameCardWide(false);
+  gameCard.innerHTML = `
+    <p class="landing-eyebrow">Oyunlar</p>
+    <h2 class="game-title">Hangisini oynayalım?</h2>
+    <p class="game-text">Biri A'dan Z'ye, biri mektuplardan.</p>
+    <button class="landing-btn" type="button" data-game-action="menu-letters">A'dan Z'ye</button>
+    <button class="landing-btn landing-btn-alt" type="button" data-game-action="menu-quiz">Bizi ne kadar tanıyorsun?</button>
+  `;
+}
+
 async function showGameIntro() {
   if (!gameCard) return;
+  setGameCardWide(false);
   gameCard.innerHTML = '<p class="game-status">Sorular yükleniyor…</p>';
 
   let data;
@@ -1428,6 +1449,7 @@ async function showGameIntro() {
         tarayıcı JSON okumayı engeller; siteyi bir sunucu üzerinden açmayı dene.
       </p>
       <button class="landing-btn" type="button" data-game-action="retry">Tekrar dene</button>
+      <button class="landing-btn landing-btn-alt" type="button" data-game-action="menu">Oyunlara dön</button>
     `;
     return;
   }
@@ -1452,6 +1474,7 @@ async function showGameIntro() {
       </div>
     </div>
     <button class="landing-btn" type="button" data-game-action="start">Başla</button>
+    <button class="landing-btn landing-btn-alt" type="button" data-game-action="menu">Oyunlara dön</button>
   `;
 }
 
@@ -1574,6 +1597,404 @@ function renderGameResult() {
     ${result?.title ? `<h2 class="game-title">${escapeHtml(result.title)}</h2>` : ""}
     ${result?.message ? `<p class="game-text">${escapeHtml(result.message)}</p>` : ""}
     <button class="landing-btn" type="button" data-game-action="start">Tekrar oyna</button>
+    <button class="landing-btn landing-btn-alt" type="button" data-game-action="menu">Oyunlara dön</button>
+    <button class="landing-btn landing-btn-alt" type="button" data-game-action="letters">Mektuplara git</button>
+  `;
+
+  if (percent >= 60) spawnPetalRain();
+}
+
+// ---------- A'dan Z'ye ----------
+
+const LETTER_DATA_URL = "harfler.json";
+const LETTER_BEST_KEY = "zehra-az-best-v2";
+
+function foldTr(value) {
+  return String(value)
+    .trim()
+    .replace(/\s+/g, " ")
+    .replace(/[.?!]+$/g, "")
+    .toLocaleLowerCase("tr-TR");
+}
+
+function letterCaption(letter) {
+  if (letter === "I") return "Noktasız I";
+  if (letter === "İ") return "Noktalı İ";
+  if (letter === "Ğ") return "Yumuşak ge";
+  return "";
+}
+
+function normalizeLetter(raw, index) {
+  const letter = String(raw?.letter ?? "").trim();
+  const answers = (Array.isArray(raw?.answers) ? raw.answers : [])
+    .map((item) => String(item).trim())
+    .filter(Boolean);
+  const shared = Boolean(raw?.shared);
+  if (!letter || (!raw?.question && !shared)) {
+    console.warn(`harfler.json: ${index + 1}. harf atlandı.`, raw);
+    return null;
+  }
+  if (!shared && !answers.length) {
+    console.warn(`harfler.json: ${letter} için cevap yok, bu tur geçilecek.`, raw);
+  }
+  return {
+    letter,
+    question: String(raw?.question || ""),
+    answers,
+    shared,
+    note: raw?.note ? String(raw.note) : "",
+    unwritten: !shared && !answers.length,
+  };
+}
+
+async function loadLetterData() {
+  if (letterData) return letterData;
+
+  const response = await fetch(LETTER_DATA_URL, { cache: "no-cache" });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  const raw = await response.json();
+  const letters = (Array.isArray(raw.letters) ? raw.letters : [])
+    .map(normalizeLetter)
+    .filter(Boolean);
+  if (!letters.length) throw new Error("Geçerli harf bulunamadı");
+
+  letterData = {
+    title: raw.title || "A'dan Z'ye",
+    description: raw.description || "",
+    letters,
+  };
+  return letterData;
+}
+
+function getAzBest() {
+  const value = Number(localStorage.getItem(LETTER_BEST_KEY));
+  return Number.isFinite(value) && value > 0 ? value : 0;
+}
+
+function saveAzBest(score) {
+  try {
+    localStorage.setItem(LETTER_BEST_KEY, String(score));
+  } catch (_) {
+    /* private mode / quota */
+  }
+}
+
+function renderAzScore(score, extraClass = "") {
+  return `
+    <div class="az-scores is-solo ${extraClass}">
+      <div class="az-score is-zehra is-turn">
+        <span class="az-score-value">${score}</span>
+        <span class="az-score-name">Zehra</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderAzBoard(letters, marks, currentIndex, center = null) {
+  const count = Math.max(letters.length, 1);
+  const beads = letters
+    .map((item, index) => {
+      const turn = -Math.PI / 2 + (index / count) * Math.PI * 2;
+      const x = (50 + Math.cos(turn) * 39).toFixed(2);
+      const y = (50 + Math.sin(turn) * 39).toFixed(2);
+      const mark = marks[index];
+      const classes = ["az-letter"];
+      if (index === currentIndex) classes.push("is-current");
+      if (mark === "zehra") classes.push("is-zehra");
+      else if (mark === "shared") classes.push("is-shared");
+      else if (mark === "miss") classes.push("is-miss");
+      return `<span class="${classes.join(" ")}" style="left:${x}%;top:${y}%">${escapeHtml(item.letter)}</span>`;
+    })
+    .join("");
+  const caption = center?.caption
+    ? `<p class="az-hint">${escapeHtml(center.caption)}</p>`
+    : "";
+  const middle = center?.letter
+    ? `<div class="az-ring-center">
+        <p class="az-ring-letter ${center.className || ""}">${escapeHtml(center.letter)}</p>
+        ${caption}
+      </div>`
+    : `<span class="az-ring-dot"></span>`;
+
+  return `
+    <div class="az-ring is-zehra" aria-hidden="true">
+      <svg class="az-ring-line" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="39" />
+      </svg>
+      ${beads}
+      ${middle}
+    </div>
+  `;
+}
+
+async function showLetterIntro() {
+  if (!gameCard) return;
+  letterState = null;
+  setGameCardWide(true);
+  gameCard.innerHTML = '<p class="game-status">Harfler yükleniyor…</p>';
+
+  let data;
+  try {
+    data = await loadLetterData();
+  } catch (error) {
+    console.error(error);
+    gameCard.innerHTML = `
+      <p class="landing-eyebrow">A'dan Z'ye</p>
+      <h2 class="game-title">Harfler yüklenemedi</h2>
+      <p class="game-text">
+        <code>harfler.json</code> okunamadı. Sayfa doğrudan dosyadan açıldıysa
+        siteyi bir sunucu üzerinden açmayı dene.
+      </p>
+      <button class="landing-btn" type="button" data-game-action="letter-retry">Tekrar dene</button>
+      <button class="landing-btn landing-btn-alt" type="button" data-game-action="menu">Oyunlara dön</button>
+    `;
+    return;
+  }
+
+  const best = getAzBest();
+  gameCard.innerHTML = `
+    <p class="landing-eyebrow">Bilgi yarışması</p>
+    <h2 class="game-title">${escapeHtml(data.title)}</h2>
+    <p class="game-text">${escapeHtml(data.description)}</p>
+    <div class="game-stats">
+      <div class="game-stat">
+        <span class="game-stat-value">${data.letters.length}</span>
+        <span class="game-stat-name">Harf</span>
+      </div>
+      <div class="game-stat">
+        <span class="game-stat-value">Yok</span>
+        <span class="game-stat-name">Süre</span>
+      </div>
+      <div class="game-stat">
+        <span class="game-stat-value">${best || "—"}</span>
+        <span class="game-stat-name">Toplam rekor</span>
+      </div>
+    </div>
+    <button class="landing-btn" type="button" data-game-action="letter-start">Başla</button>
+    <button class="landing-btn landing-btn-alt" type="button" data-game-action="menu">Oyunlara dön</button>
+  `;
+}
+
+function startLetterGame() {
+  if (!letterData) return;
+  letterState = {
+    index: 0,
+    score: 0,
+    marks: Array(letterData.letters.length).fill(null),
+    reveal: null,
+  };
+  renderLetterRound();
+}
+
+function renderLetterRound() {
+  if (!gameCard || !letterState || !letterData) return;
+  const { letters } = letterData;
+  const state = letterState;
+  const current = letters[state.index];
+  if (!current) {
+    renderLetterResult();
+    return;
+  }
+
+  setGameCardWide(true);
+  const caption = letterCaption(current.letter);
+  const score = renderAzScore(state.score);
+
+  if (state.reveal) {
+    const shared = Boolean(state.reveal.shared);
+    const correct = Boolean(state.reveal.correct);
+    const heroClass = shared ? "is-shared" : correct ? "is-zehra" : "is-miss";
+    const board = renderAzBoard(letters, state.marks, state.index, {
+      letter: current.letter,
+      className: heroClass,
+      caption,
+    });
+    const verdict = shared ? "Bu tur senin." : correct ? "Buldun." : "Bu harf açıkta kaldı.";
+    const answerHtml = current.answers[0]
+      ? `<p class="game-text">Doğru cevap: ${escapeHtml(current.answers[0])}</p>`
+      : "";
+
+    gameCard.innerHTML = `
+      ${score}
+      ${board}
+      <h2 class="game-question">${escapeHtml(current.question)}</h2>
+      <p class="game-verdict ${correct ? "is-correct" : "is-wrong"}">${verdict}</p>
+      ${answerHtml}
+      ${current.note ? `<p class="game-note">${escapeHtml(current.note)}</p>` : ""}
+      <button class="landing-btn" type="button" data-game-action="letter-next">
+        ${state.index >= letters.length - 1 ? "Sonucu gör" : "Sonraki harf"}
+      </button>
+    `;
+    return;
+  }
+
+  if (current.unwritten) {
+    const board = renderAzBoard(letters, state.marks, state.index, {
+      letter: current.letter,
+      className: "is-zehra",
+    });
+    gameCard.innerHTML = `
+      ${score}
+      ${board}
+      <h2 class="game-question">Bu harfin sorusu henüz yok.</h2>
+      <p class="game-text">Bu harfi geçebilirsin.</p>
+      <button class="landing-btn" type="button" data-game-action="letter-next">Sonraki harf</button>
+    `;
+    return;
+  }
+
+  if (current.shared) {
+    const board = renderAzBoard(letters, state.marks, state.index, {
+      letter: current.letter,
+      className: "is-shared",
+      caption,
+    });
+    gameCard.innerHTML = `
+      ${score}
+      ${board}
+      <h2 class="game-question">${escapeHtml(current.question)}</h2>
+      <button class="landing-btn" type="button" data-game-action="letter-shared">Puanı al</button>
+    `;
+    return;
+  }
+
+  const board = renderAzBoard(letters, state.marks, state.index, {
+    letter: current.letter,
+    className: "is-zehra",
+    caption,
+  });
+  gameCard.innerHTML = `
+    ${score}
+    ${board}
+    <h2 class="game-question">${escapeHtml(current.question)}</h2>
+    <form data-letter-form>
+      <input
+        class="az-input"
+        id="letterAnswer"
+        name="answer"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        enterkeyhint="done"
+        placeholder="${escapeHtml(current.letter)} ile başlayan cevap"
+        aria-label="Cevap"
+      />
+      <p class="az-error" id="letterError" role="alert"></p>
+      <div class="az-actions">
+        <button class="landing-btn" type="submit">Cevapla</button>
+        <button class="landing-btn landing-btn-alt" type="button" data-game-action="letter-pass">Pas</button>
+      </div>
+    </form>
+  `;
+  const field = document.getElementById("letterAnswer");
+  field?.focus({ preventScroll: true });
+  field?.scrollIntoView({ block: "nearest", behavior: prefersReducedMotion ? "auto" : "smooth" });
+}
+
+function submitLetterAnswer() {
+  if (!letterState || !letterData || letterState.reveal) return;
+  const current = letterData.letters[letterState.index];
+  if (!current || current.shared || current.unwritten) return;
+
+  const input = document.getElementById("letterAnswer");
+  const error = document.getElementById("letterError");
+  const value = foldTr(input?.value || "");
+  if (!value) {
+    if (error) error.textContent = "Bir cevap yaz.";
+    return;
+  }
+
+  const correct = current.answers.some((answer) => foldTr(answer) === value);
+  if (correct) {
+    letterState.score += 1;
+    letterState.marks[letterState.index] = "zehra";
+    letterState.reveal = { correct: true };
+    renderLetterRound();
+    return;
+  }
+
+  if (!value.startsWith(foldTr(current.letter))) {
+    if (error) error.textContent = `Cevap ${current.letter} harfiyle başlamalı. Bir daha dene.`;
+    input?.focus({ preventScroll: true });
+    return;
+  }
+
+  letterState.marks[letterState.index] = "miss";
+  letterState.reveal = { correct: false };
+  renderLetterRound();
+}
+
+function passLetter() {
+  if (!letterState || !letterData || letterState.reveal) return;
+  const current = letterData.letters[letterState.index];
+  if (!current || current.shared || current.unwritten) return;
+
+  letterState.marks[letterState.index] = "miss";
+  letterState.reveal = { correct: false };
+  renderLetterRound();
+}
+
+function claimSharedLetter() {
+  if (!letterState || !letterData || letterState.reveal) return;
+  const current = letterData.letters[letterState.index];
+  if (!current?.shared) return;
+  letterState.score += 1;
+  letterState.marks[letterState.index] = "shared";
+  letterState.reveal = { correct: true, shared: true };
+  renderLetterRound();
+}
+
+function nextLetter() {
+  if (!letterState || !letterData) return;
+  const current = letterData.letters[letterState.index];
+  if (current?.unwritten && letterState.marks[letterState.index] == null) {
+    letterState.marks[letterState.index] = "empty";
+  }
+  letterState.reveal = null;
+  letterState.index += 1;
+  if (letterState.index >= letterData.letters.length) {
+    renderLetterResult();
+    return;
+  }
+  renderLetterRound();
+}
+
+function renderLetterResult() {
+  if (!gameCard || !letterState || !letterData) return;
+  const { letters } = letterData;
+  const { score, marks } = letterState;
+  const total = letters.length;
+  const percent = total > 0 ? Math.round((score / total) * 100) : 0;
+  let title = "Bir daha";
+  let message = "Cevaplar sende. İstersen bir tur daha.";
+  if (percent >= 90) {
+    title = "Mükemmel";
+    message = "Aşkımızı çok iyi biliyorsun.";
+  } else if (percent >= 60) {
+    title = "Çok iyi";
+    message = "Çoğunu bildin. Birkaç harf kaçmış.";
+  } else if (percent >= 30) {
+    title = "Fena değil";
+    message = "Bir kısmı duruyor. İstersen bir tur daha.";
+  }
+
+  const previousBest = getAzBest();
+  const isNewBest = score > previousBest;
+  if (isNewBest && score > 0) saveAzBest(score);
+
+  setGameCardWide(true);
+  gameCard.innerHTML = `
+    <p class="landing-eyebrow">A'dan Z'ye</p>
+    ${renderAzScore(score, "az-scores-final")}
+    ${renderAzBoard(letters, marks, -1)}
+    <p class="az-legend">Kırmızı olanlar doğru</p>
+    <p class="game-text">${score} / ${total} doğru</p>
+    ${isNewBest && score > 0 ? '<span class="archive-badge game-best-badge">Yeni rekor</span>' : ""}
+    <h2 class="game-title">${escapeHtml(title)}</h2>
+    <p class="game-text">${escapeHtml(message)}</p>
+    <button class="landing-btn" type="button" data-game-action="menu-letters">Tekrar oyna</button>
+    <button class="landing-btn landing-btn-alt" type="button" data-game-action="menu">Oyunlara dön</button>
     <button class="landing-btn landing-btn-alt" type="button" data-game-action="letters">Mektuplara git</button>
   `;
 
@@ -1587,11 +2008,25 @@ gameCard?.addEventListener("click", (event) => {
     return;
   }
 
-  const action = event.target.closest("[data-game-action]")?.dataset.gameAction;
+  const actionEl = event.target.closest("[data-game-action]");
+  const action = actionEl?.dataset.gameAction;
   if (action === "start") startGame();
   else if (action === "next") nextGameQuestion();
   else if (action === "retry") showGameIntro();
   else if (action === "letters") goToLetters();
+  else if (action === "menu") showGameMenu();
+  else if (action === "menu-quiz") showGameIntro();
+  else if (action === "menu-letters" || action === "letter-retry") showLetterIntro();
+  else if (action === "letter-start") startLetterGame();
+  else if (action === "letter-pass") passLetter();
+  else if (action === "letter-next") nextLetter();
+  else if (action === "letter-shared") claimSharedLetter();
+});
+
+gameCard?.addEventListener("submit", (event) => {
+  if (!event.target?.matches?.("[data-letter-form]")) return;
+  event.preventDefault();
+  submitLetterAnswer();
 });
 
 goLettersBtn?.addEventListener("click", goToLetters);

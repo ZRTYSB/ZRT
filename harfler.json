@@ -1,0 +1,147 @@
+
+{
+  "title": "Yusuf & Zehra - A'dan Z'ye Aşkımız",
+  "description": "Süre yok. Cevap, ekrandaki harfle başlar. Bakalım aşkımızı ne kadar iyi biliyorsun? ❤️",
+  "letters": [
+    {
+      "letter": "A",
+      "question": "Yusuf'un Zehraya karşı hissetiği yoğun sevgiyi ifade eden kelime?",
+      "answers": ["Aşk"]
+    },
+    {
+      "letter": "B",
+      "question": "Zehra'nın en sık kullandığı kelime?",
+      "answers": ["Bakarız"]
+    },
+    {
+      "letter": "C",
+      "question": "Yusuf'un Zehra'ya '... içi' şeklinde seslendiği sevgi sözcüğü nedir?",
+      "answers": ["Canımın"]
+    },
+    {
+      "letter": "Ç",
+      "question": "Yusuf'un Zehraya aldığı ilk hediye?",
+      "answers": ["Çiçek"]
+    },
+    {
+      "letter": "D",
+      "question": "Yusuf'un en olmak istediği şey?",
+      "answers": ["Damat"]
+    },
+    {
+      "letter": "E",
+      "question": "Yusuf'un Zehradan önce en son düşündüğü şey?",
+      "answers": ["Evlenmek"]
+    },
+    {
+      "letter": "F",
+      "question": "Zehra ve Yusufun tuttukları takım nedir?",
+      "answers": ["Fenerbahçe"]
+    },
+    {
+      "letter": "G",
+      "question": "Cadı lakaplı tıp personeli?",
+      "answers": ["Gamze"]
+    },
+    {
+      "letter": "H",
+      "question": "Zehranın Yusufu özlediğinde yaptığı şey?",
+      "answers": ["Huysuzluk"]
+    },
+    {
+      "letter": "I",
+      "question": "Zehranın bir bağımlılığı?",
+      "answers": ["Işık"]
+    },
+    {
+      "letter": "İ",
+      "question": "Yusuf ile Zehranın beraber yaşayacakları ilk şehir?",
+      "answers": ["İzmir"]
+    },
+    {
+      "letter": "J",
+      "question": "Yusuf ile Zehranın sorun yaşadığı kolluk kuvveti?",
+      "answers": ["Jandarma"]
+    },
+    {
+      "letter": "K",
+      "question": "Yusuf'un Zehra'ya kullandığı, kanatları olan sevimli bir canlıdan gelen hitap nedir?",
+      "answers": ["Kelebek"]
+    },
+    {
+      "letter": "L",
+      "question": "Yusuf'a Zehra ile tanıştıktan sonra söylenen bir kelime?",
+      "answers": ["Leyla"]
+    },
+    {
+      "letter": "M",
+      "question": "Her şeyin nasıl olması gerekmez?",
+      "answers": ["Mantıklı"]
+    },
+    {
+      "letter": "N",
+      "question": "Zehra'nın bazen Yusuf'a takılarak, bazen de şakalaşarak yaptığı tatlı inatlaşmaya ne denir?",
+      "answers": ["Naz"]
+    },
+    {
+      "letter": "O",
+      "question": "Zehranın futbolda bildiği bir terim?",
+      "answers": ["Ofsayt"]
+    },
+    {
+      "letter": "Ö",
+      "question": "Yusuf'un Zehraya karşı hissettiği sevgiye yakın olan duygunun ismi?",
+      "answers": ["Özlem"]
+    },
+    {
+      "letter": "P",
+      "question": "Yusufun izmirde zehrayla yediği son yemek?",
+      "answers": ["Pide"]
+    },
+    {
+      "letter": "R",
+      "question": "Zehranın bir eğitimde kullandığı aracın ismi?",
+      "answers": ["Raket"]
+    },
+    {
+      "letter": "S",
+      "question": "Yusuf'un Zehra'ya sık sık söylediği bir hitap kelimesi?",
+      "answers": ["Sevdiceğim"]
+    },
+    {
+      "letter": "Ş",
+      "question": "Yusuf'un Zehra'yla tanıştıktan sonra en çok kıldığı namaz türü?",
+      "answers": ["Şükür"]
+    },
+    {
+      "letter": "T",
+      "question": "Zehranın çok güzel yaptığı bir tatlı?",
+      "answers": ["Tiramisu"]
+    },
+    {
+      "letter": "U",
+      "question": "Zehra ortalama 2 sene gibi bir sürede ne olacak?",
+      "answers": ["Uzman"]
+    },
+    {
+      "letter": "Ü",
+      "question": "Yusuf ve Zehra'nın istanbulda en çok buluştuğu yer?",
+      "answers": ["Üsküdar"]
+    },
+    {
+      "letter": "V",
+      "question": "Yusuf Zehranın nöbet ertesi gününde neyin bitmesini bekler?",
+      "answers": ["Vizit"]
+    },
+    {
+      "letter": "Y",
+      "question": "Yusuf Zehranın en çok neresini sever?",
+      "answers": ["Yanak"]
+    },
+    {
+      "letter": "Z",
+      "question": "Yusuf'un hayatının anlamı, kelebeği, bir tanesi ve geleceğini birlikte hayal ettiği kadının adı nedir?",
+      "answers": ["Zehra Rüveyda"]
+    }
+  ]
+}
